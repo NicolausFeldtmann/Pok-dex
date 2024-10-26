@@ -1,0 +1,17 @@
+body{
+    background-color: rgb(240, 48, 48);
+    color: #F7C505;
+    font-family: titan one;
+    font-weight: 100;
+}
+
+.headBox{
+    background-color: rgb(94, 154, 213);
+    border: solid black 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.content{
+    display: flex;
+}
