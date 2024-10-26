@@ -1,9 +1,10 @@
 .pokeCard{
-    border: solid black 5px;
-    background-color: rgb(94, 154, 213);
-
-    padding: 24px; 
+    border: solid #FFE361 12px;
+    border-radius: 15px;
+    background-color: #9EC884;
+    width: 180px;
     margin: 24px;
+    padding: 12px;
 }
 
 .cardHeader{
@@ -17,12 +18,14 @@ h3{
 }
 
 .pokeImgArea{
-    border: solid black 5px;
+    border: solid #E4D03E 5px;
     margin-top: 8px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
 }
 
 .pokeImg{
-    width: 128px;
     height: 128px;
 }
 
