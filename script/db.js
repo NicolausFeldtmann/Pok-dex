@@ -1,13 +1,6 @@
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon-species/";
+const BASE_URL = "https://pokeapi.co/api/v2/pokemon-species";
 
-let poke = [
-    {"name": "Testmon"},
-    {"name": "Tesrmon2"},
-    {"name": "Testmon3"},
-    {"name": "Testmon4"},
-    {"name": "Testmon5"},
-]
-
+let pokeTotal = [];
 
 function getData() {
     console.log('test');
@@ -15,9 +8,19 @@ function getData() {
 }
 
 async function fetchThemAll() {
-let response = await fetch(BASE_URL);
-let responseToJson = await response.json();
-console.log(responseToJson);
+    let response = await fetch(BASE_URL);
+    let responseMon = await response.json();
+    console.log(responseMon);
+    
+
+    const results = responseMon.results;
+
+    for (let i = 0; i < results.length; i++) {
+        monToArray(results, i);
+    }
+    renderMonEntrys();
 }
 
-
+function monToArray (results, i) {
+    pokeTotal.push(results[i]);
+}

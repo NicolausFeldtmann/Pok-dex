@@ -1,13 +1,17 @@
-function init() {
+
+async function init() {
     getData();
-    renderMonEntrys();
 }
 
 function renderMonEntrys() {
     let contentRef = document.getElementById('content');
     contentRef.innerHTML ="";
-    for (let i = 0; i < poke.length; i++) {
-        let name = poke[i].name;
+
+    for(let i = 0; i < pokeTotal.length; i++) {
+        let name = pokeTotal[i].name;
+        console.log(name);
+
         contentRef.innerHTML += getPokeTemplates(name);
+        
     }
 }
