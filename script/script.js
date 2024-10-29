@@ -12,6 +12,17 @@ function renderMonEntrys() {
         console.log(name);
 
         contentRef.innerHTML += getPokeTemplates(name);
-        
+    }
+}
+
+function renderInfoEntry() {
+    let contentRef = document.getElementById('pokeInfoArea');
+    contentRef.innerHTML ="";
+
+    for (let a = 0; a < pokeInfo.length; a++) {
+        let color = pokeInfo[a].color;
+        let name = pokeInfo[a].name;
+
+        contentRef.innerHTML += getPokeInfoTemplates(color, name)
     }
 }

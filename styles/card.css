@@ -3,8 +3,14 @@
     border-radius: 15px;
     background-color: #9EC884;
     width: 180px;
+    height: 300px;
     margin: 24px;
     padding: 12px;
+    box-shadow:
+    7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066),
+    12.4px 19.6px 10px rgba(0, 0, 0, 0.095),
+    18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124),
+    40px 63px 80px rgba(0, 0, 0, 0.19);
 }
 
 .cardHeader{
@@ -20,13 +26,12 @@ h3{
 .pokeImgArea{
     border: solid #E4D03E 5px;
     margin-top: 8px;
-    padding: 8px;
     display: flex;
     justify-content: center;
 }
 
 .pokeImg{
-    height: 128px;
+    width: 200px;
 }
 
 .pokeInfoArea{
@@ -39,4 +44,9 @@ h3{
 .infoIcon{
     width: 32px;
     height: 32px;
+}
+
+.colorTest{
+    width: 64px;
+    height: 64px;
 }

@@ -11,20 +11,47 @@ header{
 }
 
 .headBox{
-    background-color: rgb(94, 154, 213);
-    border: solid #FFE361 12px;
+    background-color: #F7C505;
     border-radius: 15px;
     display: flex;
     justify-content: center;
     max-width: 480px;
     font-size: 28px;
-    padding: 28px;
+    padding: 8px;
+    margin-bottom: 48px;
+    box-shadow:
+    7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066),
+    12.4px 19.6px 10px rgba(0, 0, 0, 0.095),
+    18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124),
+    40px 63px 80px rgba(0, 0, 0, 0.19);
+}
+
+.headBoxInsiede{
+    box-shadow: inset 0px 12px 25px 5px rgba(0, 0, 0, 0.3);
+    background-color: rgb(94, 154, 213);
+    border-radius: 10px;
+    padding: 16px;
 }
 
 h1{
     margin: 0;
+    font-size: 80px;
+}
+
+.displayBody{
+    display: flex;
+    justify-content: center;
+}
+
+.pokeDisplay{
+    border-radius: 35px;
+    background-color: gray;
+    width: 75%;
+    padding: 24px;
+    box-shadow: inset 0px 12px 25px 5px rgba(0, 0, 0, 0.4);
 }
 
 .content{
     display: flex;
+    flex-wrap: wrap;
 }

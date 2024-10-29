@@ -7,11 +7,19 @@ function getPokeTemplates(name) {
             </div>
 
             <div class="pokeImgArea">
-                <img class="pokeImg" src="./assets/img/pokeTestMon.png">
+                <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
             </div>
 
-            <div class="pokeInfoArea">
+            <div class="pokeInfoArea" id="pokeInfoArea">
                 <img class="infoIcon" src="./assets/img/testIcon.png">
             </div>
+        </div>`
+}
+
+function getPokeInfoTemplates(color, name) {
+
+    return `
+        <div class="colorTest" ${color[a],name}>
+        
         </div>`
 }
