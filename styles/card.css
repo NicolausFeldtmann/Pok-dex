@@ -1,18 +1,64 @@
-.pokeCard{
+.pokeCard {
+
+    transition: transform 0.5s ease;
+    perspective: 1000px; /* Perspektive für den 3D-Effekt */
+    
+}
+
+.card-inner {
     border: solid #FFE361 12px;
     border-radius: 15px;
     background-color: #9EC884;
-    width: 180px;
-    height: 300px;
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 324px;
     margin: 24px;
     padding: 12px;
+    transition: transform 0.5s ease;
     box-shadow:
-    7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066),
-    12.4px 19.6px 10px rgba(0, 0, 0, 0.095),
-    18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124),
-    40px 63px 80px rgba(0, 0, 0, 0.19);
+        7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066),
+        12.4px 19.6px 10px rgba(0, 0, 0, 0.095),
+        18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124),
+        40px 63px 80px rgba(0, 0, 0, 0.19);
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Behält 3D-Transformation bei */
 }
 
+.card-front, .card-back {
+    position: absolute;
+    backface-visibility: hidden; /* Versteckt die Rückseite */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.card-front {
+    display: flow;
+    background: #9EC884; /* Verwendung der Hintergrundfarbe der Vorderseite */
+    color: black;
+}
+
+.card-back {
+    background: #007bff; /* Rückseite Hintergrundfarbe */
+    color: white;
+    transform: rotateY(180deg); /* Dreht die Rückseite */
+    text-align: center;
+}
+
+/* Bei Hover vergrößern */
+.pokeCard:hover {
+    cursor: pointer;
+    transform: scale(1.2); /* Vergrößere die Karte bei Hover */
+}
+
+/* Wenn die Karte umgedreht ist */
+.pokeCard.flipped .card-inner {
+    transform: rotateY(180deg); /* Umdrehen der Karte */
+}
 .cardHeader{
     background-color: rgb(94, 154, 213);
     border: solid #E4D03E 5px;
@@ -24,12 +70,22 @@
 
 h3{
     font-weight: 100;
+    margin: 8px;
+    margin-inline: 8px;
+}
+
+h4{
+    margin: 0;
+    margin-bottom: 8px;
+    font-size: 24px;
+    color: rgb(62, 62, 62);
 }
 
 .pokeImgArea{
     border: solid #E4D03E 5px;
+    background-color: #fff1d8;
     border-radius: 10px;
-    margin-top: 8px;
+    margin-top: 24px;
     display: flex;
     justify-content: center;
 }
@@ -54,3 +110,4 @@ h3{
     width: 64px;
     height: 64px;
 }
+

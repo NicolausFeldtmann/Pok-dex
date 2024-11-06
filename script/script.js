@@ -13,8 +13,6 @@ function renderMonEntrys() {
 
     for(let i = 0; i < pokeTotal.length; i++) {
         let name = pokeTotal[i].name;
-        console.log(name);
-
         contentRef.innerHTML += getPokeTemplates(name, `${i + 1}`, i);
     }
 }
@@ -39,6 +37,10 @@ function monToArray (results, i) {
 
 function loadPageTwo() {
     fetchTheRest();
+    showButton();
+    hideButton();
+    console.log("lade...");
+    
 }
 
 async function fetchTheRest() {
@@ -59,12 +61,21 @@ function renderMonEntrys2() {
 
     for(let i = 0; i < pokeTotal2.length; i++) {
         let name = pokeTotal2[i].name;
-        console.log(name);
 
-        contentRef.innerHTML += getPokeTemplates(name, `${i + 501}`, i);
+        contentRef.innerHTML += getPokeTemplates(name, `${i + 1}`, i);
     }
 }
 
 function monToASecundArray(results, i) {
     pokeTotal2.push(results[i]);
+}
+
+function showButton() {
+    var x = document.getElementById('back');
+    x.classList.toggle('buttonShow');
+}
+
+function hideButton() {
+    var x = document.getElementById('next');
+    x.classList.toggle('buttonHide');
 }

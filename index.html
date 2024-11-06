@@ -16,11 +16,9 @@
 <body onload="init()">
 
     <header>
-        <div class="headBox">
-            <div class="headBoxInsiede">
-                <h1>Pokédex!</h1>
-            </div>
-        </div>
+
+        <h1>Pokédex!</h1>
+
     </header>
 
     <div class="displayBody">
@@ -30,9 +28,17 @@
     </div>
 
     <div class="bottom">
-        <div class="bottomBox">
+        <div class="bottomBox" id="next">
             <div class="bottomInside">
                 <h2 onclick="loadPageTwo()">NEXT!</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div class="bottomBoxBack" id="back">
+            <div class="bottomInside">
+                <h2 onclick="renderMonEntrys()">BACK!</h2>
             </div>
         </div>
     </div>

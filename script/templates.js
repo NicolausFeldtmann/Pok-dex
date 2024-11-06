@@ -1,35 +1,42 @@
-function getPokeTemplates(name, id) {
-
+function getPokeTemplates(name, number, id) {
     return `
-        <div class="pokeCard">
-            <div class="cardHeader">
-                <h3>${name}</h3>
+        <div class="pokeCard" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h4>#${number}</h4>
+                    <div class="cardHeader">
+                        <h3>${name}</h3>
+                    </div>
+                    <div class="pokeImgArea">
+                        <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id + 1}.png">
+                    </div>
+                </div>
+                <div class="card-back">
+                    <h4>Details über ${name}</h4>
+                    <p>Hier könnten weitere Informationen über den Pokémon stehen.</p>
+                </div>
             </div>
-
-            <div class="pokeImgArea">
-                <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
-            </div>
-
-            <div class="pokeInfoArea" id="pokeInfoArea">
-                <img class="infoIcon" src="./assets/img/testIcon.png">
-            </div>
-        </div>`
+        </div>`;
 }
 
-function getPokeTemplates2(name, id) {
+function getPokeTemplates2(name, number, id) {
 
     return `
-        <div class="pokeCard">
-            <div class="cardHeader">
-                <h3>${name}</h3>
+        <div class="pokeCard" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h4>#${number}</h4>
+                    <div class="cardHeader">
+                        <h3>${name}</h3>
+                    </div>
+                    <div class="pokeImgArea">
+                        <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
+                    </div>
+                </div>
+                <div class="card-back">
+                    <h4>Details über ${name}</h4>
+                    <p>Hier könnten weitere Informationen über den Pokémon stehen.</p>
+                </div>
             </div>
-
-            <div class="pokeImgArea">
-                <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
-            </div>
-
-            <div class="pokeInfoArea" id="pokeInfoArea">
-                <img class="infoIcon" src="./assets/img/testIcon.png">
-            </div>
-        </div>`
+        </div>`;
 }
