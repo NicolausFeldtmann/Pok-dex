@@ -61,7 +61,7 @@
 }
 .cardHeader{
     background-color: rgb(94, 154, 213);
-    border: solid #E4D03E 5px;
+    border: solid #FFE361 5px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -72,6 +72,7 @@ h3{
     font-weight: 100;
     margin: 8px;
     margin-inline: 8px;
+    color: #FFE361;
 }
 
 h4{
@@ -82,7 +83,7 @@ h4{
 }
 
 .pokeImgArea{
-    border: solid #E4D03E 5px;
+    border: solid #FFE361 5px;
     background-color: #fff1d8;
     border-radius: 10px;
     margin-top: 24px;

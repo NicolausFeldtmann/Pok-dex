@@ -36,9 +36,11 @@ function monToArray (results, i) {
 //load Page two
 
 function loadPageTwo() {
+    document.getElementById('content').innerHTML = "";
     fetchTheRest();
     showButton();
     hideButton();
+    document.documentElement.scrollTop = 0
     console.log("lade...");
     
 }
@@ -62,7 +64,8 @@ function renderMonEntrys2() {
     for(let i = 0; i < pokeTotal2.length; i++) {
         let name = pokeTotal2[i].name;
 
-        contentRef.innerHTML += getPokeTemplates(name, `${i + 1}`, i);
+        const number = pokeTotal.length + (i + 1);
+        contentRef.innerHTML += getPokeTemplates2(name, number, i);
     }
 }
 

@@ -30,7 +30,7 @@ function getPokeTemplates2(name, number, id) {
                         <h3>${name}</h3>
                     </div>
                     <div class="pokeImgArea">
-                        <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
+                        <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id + 501}.png">
                     </div>
                 </div>
                 <div class="card-back">
