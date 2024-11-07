@@ -106,3 +106,20 @@ h2{
     visibility: hidden;
     opacity: 1;
 }
+
+::-webkit-scrollbar{
+    width: 20px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: rgb(255, 227, 97);
+    border-radius: 10px;
+    height: 64px;
+    box-shadow: 7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066), 12.4px 19.6px 10px rgba(0, 0, 0, 0.095), 18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124), 40px 63px 80px rgba(0, 0, 0, 0.19);
+}
+
+::-webkit-scrollbar-track{
+    height: 36px;
+    background-color: rgb(178, 7, 7);
+}
