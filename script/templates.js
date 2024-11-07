@@ -13,7 +13,7 @@ function getPokeTemplates(name, number, id) {
                 </div>
                 <div class="card-back">
                     <h4>Details über ${name}</h4>
-                    <p>Hier könnten weitere Informationen über den Pokémon stehen.</p>
+                    <p>Bin noch  nicht so ganz sicher wie ich das Hier füllen kann.</p>
                 </div>
             </div>
         </div>`;
@@ -35,7 +35,7 @@ function getPokeTemplates2(name, number, id) {
                 </div>
                 <div class="card-back">
                     <h4>Details über ${name}</h4>
-                    <p>Hier könnten weitere Informationen über den Pokémon stehen.</p>
+                    <p>Bin noch  nicht so ganz sicher wie ich das Hier füllen kann.</p>
                 </div>
             </div>
         </div>`;

@@ -82,3 +82,7 @@ function hideButton() {
     var x = document.getElementById('next');
     x.classList.toggle('buttonHide');
 }
+
+function loadingScreen() {
+    
+}

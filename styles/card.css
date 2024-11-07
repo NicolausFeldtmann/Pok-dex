@@ -1,7 +1,7 @@
 .pokeCard {
 
     transition: transform 0.5s ease;
-    perspective: 1000px; /* Perspektive für den 3D-Effekt */
+    perspective: 1000px;
     
 }
 
@@ -23,12 +23,12 @@
         40px 63px 80px rgba(0, 0, 0, 0.19);
     position: relative;
     transition: transform 0.6s;
-    transform-style: preserve-3d; /* Behält 3D-Transformation bei */
+    transform-style: preserve-3d; 
 }
 
 .card-front, .card-back {
     position: absolute;
-    backface-visibility: hidden; /* Versteckt die Rückseite */
+    backface-visibility: hidden; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,26 +38,24 @@
 
 .card-front {
     display: flow;
-    background: #9EC884; /* Verwendung der Hintergrundfarbe der Vorderseite */
+    background: #9EC884; 
     color: black;
 }
 
 .card-back {
-    background: #007bff; /* Rückseite Hintergrundfarbe */
+    background: #007bff; 
     color: white;
-    transform: rotateY(180deg); /* Dreht die Rückseite */
+    transform: rotateY(180deg); 
     text-align: center;
 }
 
-/* Bei Hover vergrößern */
 .pokeCard:hover {
     cursor: pointer;
-    transform: scale(1.2); /* Vergrößere die Karte bei Hover */
+    transform: scale(1.2); 
 }
 
-/* Wenn die Karte umgedreht ist */
 .pokeCard.flipped .card-inner {
-    transform: rotateY(180deg); /* Umdrehen der Karte */
+    transform: rotateY(180deg); 
 }
 .cardHeader{
     background-color: rgb(94, 154, 213);
