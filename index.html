@@ -17,15 +17,28 @@
 </head>
 <body onload="init()">
 
+    <div class="animatedArea" id="animatedArea">
+        <div class="spinnObject">
+            <img class="spinningBall" src="./assets/img/pokeBallSpin.png">
+        </div>
+
+        <div class="loadMessage">
+            <div class="boardRim">
+                <div class="messageInside">
+                    <h2>LOADING...!</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
 
         <h1>Pokédex!</h1>
 
     </header>
 
-    <div class="animatedArea">
-        <img class="spinningBall" src="./assets/img/pokeBallSpin.png">
-    </div>
+
+
     <div class="displayBody">
         <div class="pokeDisplay">
             <div class="content" id="content"></div>
@@ -43,7 +56,7 @@
     <div class="bottom">
         <div class="bottomBoxBack" id="back">
             <div class="bottomInside">
-                <h2 onclick="renderMonEntrys(), document.documentElement.scrollTop = 0">BACK!</h2>
+                <h2 onclick="fetchThemAll(), document.documentElement.scrollTop = 0">BACK!</h2>
             </div>
         </div>
     </div>

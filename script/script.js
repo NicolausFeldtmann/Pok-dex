@@ -1,6 +1,8 @@
 
 async function init() {
-    getData();
+    
+    await getData();
+
 }
 
 function getData() {
@@ -8,6 +10,7 @@ function getData() {
 }
 
 function renderMonEntrys() {
+    
     let contentRef = document.getElementById('content');
     contentRef.innerHTML ="";
 
@@ -18,6 +21,9 @@ function renderMonEntrys() {
 }
 
 async function fetchThemAll() {
+    let animatedArea = document.getElementById('animatedArea');
+    animatedArea.style.display = 'grid';
+
     let response = await fetch(BASE_URL);
     let responseMon = await response.json();
     
@@ -27,6 +33,7 @@ async function fetchThemAll() {
         monToArray(results, i);
     }
     renderMonEntrys();
+    animatedArea.style.display = 'none';
 }
 
 function monToArray (results, i) {
@@ -40,12 +47,13 @@ function loadPageTwo() {
     fetchTheRest();
     showButton();
     hideButton();
-    document.documentElement.scrollTop = 0
-    console.log("lade...");
-    
+    document.documentElement.scrollTop = 0;
 }
 
 async function fetchTheRest() {
+    let animatedArea = document.getElementById('animatedArea');
+    animatedArea.style.display = 'grid';
+
     let response = await fetch(SECUNDARY_URL);
     let responseMon = await response.json();
     
@@ -54,7 +62,8 @@ async function fetchTheRest() {
     for (let i = 0; i < results.length; i++) {
         monToASecundArray(results, i);
     }
-    renderMonEntrys2()
+    renderMonEntrys2();
+    animatedArea.style.display = 'none';
 }
 
 function renderMonEntrys2() {
@@ -83,6 +92,3 @@ function hideButton() {
     x.classList.toggle('buttonHide');
 }
 
-function loadingScreen() {
-    
-}
