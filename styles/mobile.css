@@ -47,15 +47,46 @@
     }
 
     .card-inner{
-        height: 200px;
-        width: 88px;
+        height: 188px;
+        width: 80px;
         margin: 8px;
+        border: solid #FFE361 6px;
+    }
+
+    .card-back{
+        font-size: 8px;
     }
 
     .pokeImg{
         max-width: 96px;
     }
+
+    .spinnObject{
+        height: 248px;
+    }
+
+    h2{
+        font-size: 24px;
+    }
+
+    .bottomBox{
+        padding: 6px;
+    }
+
+    .bottomInside{
+        padding: 6px;
+    }
+
+    @keyframes wobble {
+        0% { transform: translateX(0%); }
+        15% { transform: translateX(-10%) rotate(-5deg); }
+        30% { transform: translateX(5%) rotate(3deg); }
+        45% { transform: translateX(-5%) rotate(-3deg); }
+        60% { transform: translateX(10%) rotate(2deg); }
+        75% { transform: translateX(-5%) rotate(-1deg); }
+        100% { transform: translateX(0%); }
  }
+}
 
 
 
@@ -65,8 +96,8 @@
     }
 
     .card-inner{
-        height: 148px;
-        width: 72px;
+        height: 132px;
+        width: 60px;
     }
 
     h3{
@@ -76,4 +107,31 @@
     .pokeImg{
         max-width: 48px;
     }
+
+    .spinnObject{
+        height: 148px;
+    }
+
+    h2{
+        font-size: 16px;
+    }
+
+    .boardRim{
+        padding: 8px;
+        margin-bottom: 248px;
+    }
+
+    .messageInside{
+        padding: 8px;
+    }
+
+    @keyframes wobble {
+        0% { transform: translateX(0%); }
+        15% { transform: translateX(-2%) rotate(-5deg); }
+        30% { transform: translateX(0%) rotate(3deg); }
+        45% { transform: translateX(0%) rotate(-3deg); }
+        60% { transform: translateX(2%) rotate(2deg); }
+        75% { transform: translateX(-2%) rotate(-1deg); }
+        100% { transform: translateX(0%); }
+ }
  }
