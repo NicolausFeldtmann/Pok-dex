@@ -1,0 +1,79 @@
+@media (max-width: 1800px) {
+    h1{
+        font-size: 248px;
+    }
+}
+
+
+
+ @media (max-width: 1300px) {
+    h1{
+        font-size: 180px;
+    }
+ }
+
+ @media (max-width: 945px) {
+    h1{
+        font-size: 124px;
+    }
+
+    h3{
+        font-size: 16px;
+    }
+
+    .card-inner{
+        height: 296px;
+        width: 148px;
+    }
+
+    .pokeImg{
+        max-width: 132px;
+    }
+ }
+
+
+
+ @media (max-width: 660px) {
+    h1{
+        font-size: 80px;
+    }
+
+    h3{
+        font-size: 12px;
+    }
+
+    h4{
+        font-size: 12px;
+    }
+
+    .card-inner{
+        height: 200px;
+        width: 88px;
+        margin: 8px;
+    }
+
+    .pokeImg{
+        max-width: 96px;
+    }
+ }
+
+
+
+ @media (max-width: 400px) {
+    h1{
+        font-size: 48px;
+    }
+
+    .card-inner{
+        height: 148px;
+        width: 72px;
+    }
+
+    h3{
+        font-size: 8px;
+    }
+
+    .pokeImg{
+        max-width: 48px;
+    }
+ }
