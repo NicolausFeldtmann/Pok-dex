@@ -5,4 +5,5 @@ const IMG_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprite
 let pokeTotal = [];
 let pokeTotal2 = [];
 let pokeImg = [];
+let monDetail = [];
 

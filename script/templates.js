@@ -1,6 +1,6 @@
 function getPokeTemplates(name, number, id) {
     return `
-        <div class="pokeCard" onclick="this.classList.toggle('flipped')">
+        <div class="pokeCard" onclick="this.classList.toggle('flipped'), fetchDetail(${id + 1})">
             <div class="card-inner">
                 <div class="card-front">
                     <h4>#${number}</h4>
@@ -11,9 +11,8 @@ function getPokeTemplates(name, number, id) {
                         <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id + 1}.png">
                     </div>
                 </div>
-                <div class="card-back">
-                    <h4>Details über ${name}</h4>
-                    <p>Bin noch  nicht so ganz sicher wie ich das Hier füllen kann.</p>
+                <div class="card-back" id="card-back">
+
                 </div>
             </div>
         </div>`;
@@ -39,4 +38,12 @@ function getPokeTemplates2(name, number, id) {
                 </div>
             </div>
         </div>`;
+}
+
+function getBackSideTemplate(info) {
+
+    return`
+        <h4> ${info}</h4>
+        
+    `
 }
