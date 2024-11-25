@@ -32,13 +32,13 @@ function getData() {
 }
 
 function renderMonEntrys() {
-    
     let contentRef = document.getElementById('content');
-    contentRef.innerHTML ="";
+    contentRef.innerHTML = ""; 
 
-    for(let i = 0; i < pokeTotal.length; i++) {
-        let name = pokeTotal[i].name;
-        contentRef.innerHTML += getPokeTemplates(name, `${i + 1}`, i);
+    for (let i = 0; i < pokeTotal.length; i++) {
+        let name = pokeTotal[i].name; 
+        let id = i + 1; 
+        contentRef.innerHTML += getPokeTemplates(name, id, id); 
     }
 }
 
@@ -46,44 +46,69 @@ async function fetchThemAll() {
     let animatedArea = document.getElementById('animatedArea');
     animatedArea.style.display = 'grid';
 
-    let response = await fetch(BASE_URL);
+    let response = await fetch(BASE_URL); 
     let responseMon = await response.json();
     const results = responseMon.results;
 
+    pokeTotal = []; 
     for (let i = 0; i < results.length; i++) {
-        monToArray(results, i);
+        monToArray(results, i); 
     }
-    renderMonEntrys();
+    renderMonEntrys(); 
     animatedArea.style.display = 'none';
 }
 
-async function fetchDetail(monId) {
-    const DETAIL_URL = `https://pokeapi.co/api/v2/pokemon-species/${monId}`;
-    const responseData = await fetch(DETAIL_URL);
-    const responseToJson = await responseData.json();
+async function fetchDetail(pokemonId) {  
+    try {
+        if (pokemonId === undefined) {
+            throw new Error("Pokemon-ID ist undefined"); 
+        }
+        let response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`); 
+        if (!response.ok) {
+            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
 
-    monDetail.push(responseToJson);
-    console.log(monDetail);
-
-    renderBackSide(monId);
+        let responseDetail = await response.json(); 
+    
+        monDetail[pokemonId - 1] = responseDetail; 
+        
+        renderBackSide(pokemonId); 
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Details:');
+    }
 }
 
 function renderBackSide(monId) {
-    let contentRef = document.getElementById('card-back');
+    let contentRef = document.getElementById(`card-back-${monId}`);
     contentRef.innerHTML = "";
 
-    const flavorTextEntries = monDetail[monId - 1].flavor_text_entries;
-    const englishFlavorText = flavorTextEntries.find(entry => entry.language.name === 'en');
+    if (!monDetail || monDetail.length === 0) {
+        return;
+    }
+
+    const flavorTextEntries = monDetail[monId - 1]?.flavor_text_entries;
+    const englishFlavorText = flavorTextEntries?.find(entry => entry.language.name === 'en');
 
     if (englishFlavorText) {
-        let info = englishFlavorText.flavor_text.replace(/\u000C/g, ' ').trim();
+        let info = englishFlavorText.flavor_text
+            .replace(/\u000C/g, ' ').trim(); 
+
         contentRef.innerHTML += getBackSideTemplate(info);
+    } else {
+        console.error('Englischer Flavor-Text nicht gefunden');
     }
 }
     
 
-function monToArray (results, i) {
-    pokeTotal.push(results[i]);
+function monToArray(results, index) {
+    pokeTotal[index] = results[index]; 
+
+}
+
+function detailToArray (results, a) {
+    monDetail.push(results[a]);
+    console.log(monDetail);
+    
 }
 
 //load Page two

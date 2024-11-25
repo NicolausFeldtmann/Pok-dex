@@ -34,6 +34,10 @@
 
 
  @media (max-width: 660px) {
+    .pokeDisplay{
+        width: 85%;
+    }
+
     h1{
         font-size: 80px;
     }
@@ -47,8 +51,8 @@
     }
 
     .card-inner{
-        height: 188px;
-        width: 80px;
+        height: 206px;
+        width: 100px;
         margin: 8px;
         border: solid #FFE361 6px;
     }
@@ -58,7 +62,7 @@
     }
 
     .pokeImg{
-        max-width: 96px;
+        max-width: 72px;
     }
 
     .spinnObject{
@@ -96,16 +100,20 @@
     }
 
     .card-inner{
-        height: 132px;
-        width: 60px;
+        height: 148px;
+        width: 88px;
     }
 
     h3{
         font-size: 8px;
     }
 
+    .pokeImgArea{
+        margin-top: 12px;
+    }
+
     .pokeImg{
-        max-width: 48px;
+        max-width: 64px;
     }
 
     .spinnObject{
