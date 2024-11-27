@@ -20,15 +20,45 @@ const pokeColor = {
     stellar: "rgb(64, 181, 165)",
 };
 
-async function init() {
+function getColor(monId) {
+    const mon = monDetail[monId - 1]; 
     
-    await getData();
+    if (!mon || !mon.types || mon.types.length === 0) {
+        console.warn(`Keine Typeninformationen für Pokémon mit ID ${monId} gefunden.`);
+        return;
+    }
 
+    const type = mon.types[0].type.name; 
+    const backgroundColor = pokeColor[type] || "rgb(206, 206, 206)";
+
+    const cardInner = document.querySelector(`.card-inner[data-pokemon-id="${monId}"]`); 
+    if (cardInner) {
+        cardInner.style.backgroundColor = backgroundColor;
+
+        const cardFront = cardInner.querySelector('.card-front');
+        if (cardFront) {
+            cardFront.style.backgroundColor = backgroundColor; 
+        } else {
+            console.warn(`card-front Element für Pokémon mit ID ${monId} nicht gefunden.`);
+        }
+    } else {
+        console.warn(`Element für Pokémon mit ID ${monId} nicht gefunden.`);
+    }
 }
 
-function getData() {
-    fetchThemAll();
-    fetchDetail();
+async function init() {
+    await getData(); 
+}
+
+async function getData() {
+    await fetchThemAll(); 
+    await fetchDetailForAll(); 
+}
+
+async function fetchDetailForAll() {
+    for (let i = 1; i <= pokeTotal.length; i++) {
+        await fetchDetail(i); 
+    }
 }
 
 function renderMonEntrys() {
@@ -38,7 +68,9 @@ function renderMonEntrys() {
     for (let i = 0; i < pokeTotal.length; i++) {
         let name = pokeTotal[i].name; 
         let id = i + 1; 
-        contentRef.innerHTML += getPokeTemplates(name, id, id); 
+        contentRef.innerHTML += getPokeTemplates(name, id, id);
+        
+        getColor(id);
     }
 }
 
@@ -58,23 +90,34 @@ async function fetchThemAll() {
     animatedArea.style.display = 'none';
 }
 
-async function fetchDetail(pokemonId) {  
+async function fetchDetail(pokemonId) {
     try {
         if (pokemonId === undefined) {
-            throw new Error("Pokemon-ID ist undefined"); 
-        }
-        let response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`); 
-        if (!response.ok) {
-            throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+            throw new Error("Pokemon-ID ist undefined");
         }
 
-        let responseDetail = await response.json(); 
-    
-        monDetail[pokemonId - 1] = responseDetail; 
-        
-        renderBackSide(pokemonId); 
+        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`);
+        if (!response.ok) {
+            throw new Error(`HTTP-Fehler beim Abrufen der Pokémon-Daten! Status: ${response.status}`);
+        }
+        let pokemonData = await response.json();
+
+        let speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`);
+        if (!speciesResponse.ok) {
+            throw new Error(`HTTP-Fehler beim Abrufen der Spezies-Daten! Status: ${speciesResponse.status}`);
+        }
+        let speciesData = await speciesResponse.json();
+
+        monDetail[pokemonId - 1] = {
+            ...pokemonData,
+            flavor_text_entries: speciesData.flavor_text_entries,
+            color: speciesData.color,
+            types: pokemonData.types, 
+        };
+        renderBackSide(pokemonId);
+        getColor(pokemonId);
     } catch (error) {
-        console.error('Fehler beim Abrufen der Details:');
+        console.error('Fehler beim Abrufen der Details:', error);
     }
 }
 
@@ -92,7 +135,6 @@ function renderBackSide(monId) {
     if (englishFlavorText) {
         let info = englishFlavorText.flavor_text
             .replace(/\u000C/g, ' ').trim(); 
-
         contentRef.innerHTML += getBackSideTemplate(info);
     } else {
         console.error('Englischer Flavor-Text nicht gefunden');

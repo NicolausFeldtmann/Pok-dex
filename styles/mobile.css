@@ -36,9 +36,9 @@
  @media (max-width: 660px) {
 
     .pokeCard.flipped .card-inner{
-        width: 248px;
-        height: 480px;
-        margin-bottom: 16px;
+        width: 180px;
+        height: 320px;
+        margin-bottom: 16;
         position: relative;
         z-index: 9;
     }

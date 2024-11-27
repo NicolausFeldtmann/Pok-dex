@@ -1,7 +1,7 @@
 function getPokeTemplates(name, number, id) {
     return `
         <div class="pokeCard" onclick="this.classList.toggle('flipped'); console.log('Clicked Pokémon ID:', ${id}); fetchDetail(${id})">
-            <div class="card-inner">
+            <div class="card-inner" data-pokemon-id="${id}">
                 <div class="card-front">
                     <h4>#${number}</h4>
                     <div class="cardHeader">
