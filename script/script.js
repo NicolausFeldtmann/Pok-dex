@@ -5,10 +5,10 @@ const pokeColor = {
     water: "rgb(41, 128, 239)",
     flying: "rgb(129, 185, 239)",
     grass: "rgb(124, 198, 107)",
-    poisen: "rgb(150, 76, 206)",
-    electic: "rgb(250, 192, 0)",
+    poison: "rgb(150, 76, 206)",
+    electric: "rgb(250, 192, 0)",
     ground: "rgb(150, 108, 78)",
-    psych: "rgb(255, 79, 134)",
+    psychic: "rgb(255, 79, 134)",
     rock: "rgb(150, 148, 132)",
     ice: "rgb(185, 234, 247)",
     bug: "rgb(177, 188, 90)",
@@ -20,6 +20,17 @@ const pokeColor = {
     stellar: "rgb(64, 181, 165)",
 };
 
+
+
+async function init() {
+    await getData(); 
+}
+
+async function getData() {
+    await fetchThemAll(); 
+    await fetchDetailForAll();
+}
+
 function getColor(monId) {
     const mon = monDetail[monId - 1]; 
     
@@ -28,10 +39,17 @@ function getColor(monId) {
         return;
     }
 
-    const type = mon.types[0].type.name; 
-    const backgroundColor = pokeColor[type] || "rgb(206, 206, 206)";
+    const types = mon.types.map(typeInfo => typeInfo.type.name);
+    const validTypes = types.filter(type => pokeColor[type]);
 
-    const cardInner = document.querySelector(`.card-inner[data-pokemon-id="${monId}"]`); 
+    if (validTypes.length === 0) {
+        console.warn(`Keine gültigen Farbtypen für Pokémon mit ID ${monId} gefunden.`);
+        return; 
+    }
+
+    const backgroundColor = validTypes.map(type => pokeColor[type])[0] || "rgb(206, 206, 206)";
+
+    const cardInner = document.querySelector(`.card-inner[data-pokemon-id="${monId}"]`);
     if (cardInner) {
         cardInner.style.backgroundColor = backgroundColor;
 
@@ -46,31 +64,22 @@ function getColor(monId) {
     }
 }
 
-async function init() {
-    await getData(); 
-}
-
-async function getData() {
-    await fetchThemAll(); 
-    await fetchDetailForAll(); 
-}
-
 async function fetchDetailForAll() {
     for (let i = 1; i <= pokeTotal.length; i++) {
         await fetchDetail(i); 
     }
 }
 
-function renderMonEntrys() {
+async function renderMonEntrys() {
     let contentRef = document.getElementById('content');
     contentRef.innerHTML = ""; 
 
-    for (let i = 0; i < pokeTotal.length; i++) {
+    for (let i = 0; i < 500; i++) {
         let name = pokeTotal[i].name; 
         let id = i + 1; 
         contentRef.innerHTML += getPokeTemplates(name, id, id);
         
-        getColor(id);
+        await getColor(id);
     }
 }
 
@@ -115,7 +124,7 @@ async function fetchDetail(pokemonId) {
             types: pokemonData.types, 
         };
         renderBackSide(pokemonId);
-        getColor(pokemonId);
+        await getColor(pokemonId);
     } catch (error) {
         console.error('Fehler beim Abrufen der Details:', error);
     }
@@ -150,49 +159,35 @@ function monToArray(results, index) {
 function detailToArray (results, a) {
     monDetail.push(results[a]);
     console.log(monDetail);
-    
 }
 
 //load Page two
 
 function loadPageTwo() {
     document.getElementById('content').innerHTML = "";
-    fetchTheRest();
+    renderMonEntrys2();
     showButton();
     hideButton();
     document.documentElement.scrollTop = 0;
 }
 
-async function fetchTheRest() {
+async function renderMonEntrys2() {
     let animatedArea = document.getElementById('animatedArea');
     animatedArea.style.display = 'grid';
 
-    let response = await fetch(SECUNDARY_URL);
-    let responseMon = await response.json();
-    
-    const results = responseMon.results;
-
-    for (let i = 0; i < results.length; i++) {
-        monToASecundArray(results, i);
-    }
-    renderMonEntrys2();
-    animatedArea.style.display = 'none';
-}
-
-function renderMonEntrys2() {
     let contentRef = document.getElementById('content');
-    contentRef.innerHTML ="";
+    contentRef.innerHTML = ""; 
 
-    for(let i = 0; i < pokeTotal2.length; i++) {
-        let name = pokeTotal2[i].name;
-
-        const number = pokeTotal.length + (i + 1);
-        contentRef.innerHTML += getPokeTemplates2(name, number, i);
+    for (let i = 501; i < 1025; i++) {
+        let name = pokeTotal[i].name; 
+        let id = i + 1; 
+        contentRef.innerHTML += getPokeTemplates(name, id, id);
+    
+        await getColor(id); 
+        await new Promise(resolve => setTimeout(resolve, 0));
     }
-}
 
-function monToASecundArray(results, i) {
-    pokeTotal2.push(results[i]);
+    animatedArea.style.display = 'none';
 }
 
 function showButton() {
