@@ -1,7 +1,7 @@
 const pokeColor = {
     normal: "rgb(206, 206, 206)",
     fire: "rgb(255, 107, 107)",
-    figthing: "rgb(255, 128, 0)",
+    fighting: "rgb(255, 128, 0)",
     water: "rgb(41, 128, 239)",
     flying: "rgb(129, 185, 239)",
     grass: "rgb(124, 198, 107)",
@@ -13,7 +13,7 @@ const pokeColor = {
     ice: "rgb(185, 234, 247)",
     bug: "rgb(177, 188, 90)",
     dragon: "rgb(0, 22, 196)",
-    ghoust: "rgb(168, 26, 168)",
+    ghost: "rgb(168, 26, 168)",
     dark: "rgb(71, 54, 54)",
     steel: "rgb(132, 166, 178)",
     fairy: "rgb(252, 169, 220)",
@@ -30,6 +30,8 @@ async function getData() {
     await fetchThemAll(); 
     await fetchDetailForAll();
 }
+
+// get and interpret data
 
 function getColor(monId) {
     const mon = monDetail[monId - 1]; 
@@ -67,19 +69,6 @@ function getColor(monId) {
 async function fetchDetailForAll() {
     for (let i = 1; i <= pokeTotal.length; i++) {
         await fetchDetail(i); 
-    }
-}
-
-async function renderMonEntrys() {
-    let contentRef = document.getElementById('content');
-    contentRef.innerHTML = ""; 
-
-    for (let i = 0; i < 500; i++) {
-        let name = pokeTotal[i].name; 
-        let id = i + 1; 
-        contentRef.innerHTML += getPokeTemplates(name, id, id);
-        
-        await getColor(id);
     }
 }
 
@@ -126,9 +115,111 @@ async function fetchDetail(pokemonId) {
         renderBackSide(pokemonId);
         await getColor(pokemonId);
     } catch (error) {
-        console.error('Fehler beim Abrufen der Details:', error);
+        console.log('Fehler beim Abrufen der Details:');
     }
 }
+
+function monToArray(results, index) {
+    pokeTotal[index] = results[index]; 
+
+}
+
+function detailToArray (results, a) {
+    monDetail.push(results[a]);
+    console.log(monDetail);
+}
+
+//load Page one
+
+async function renderMonEntrys() {
+    document.documentElement.scrollTop = 0;
+    let contentRef = document.getElementById('content');
+    contentRef.innerHTML = ""; 
+
+    for (let i = 0; i < 250; i++) {
+        let name = pokeTotal[i].name;
+        let id = i + 1; 
+        contentRef.innerHTML += getPokeTemplates(name, id, id);
+        
+        await getColor(id);
+    }
+}
+
+//load Page two
+
+function loadPageTwo() {
+    document.getElementById('content').innerHTML = "";
+    renderMonEntrys2();
+    showButton();
+    hideButton();
+    document.documentElement.scrollTop = 0;
+}
+
+async function renderMonEntrys2() {
+    document.documentElement.scrollTop = 0;
+    let animatedArea = document.getElementById('animatedArea');
+    animatedArea.style.display = 'grid';
+
+    let contentRef = document.getElementById('content');
+    contentRef.innerHTML = ""; 
+
+    for (let i = 251; i < 500; i++) {
+        let name = pokeTotal[i].name; 
+        let id = i + 1; 
+        contentRef.innerHTML += getPokeTemplates(name, id, id);
+    
+        await getColor(id); 
+        await new Promise(resolve => setTimeout(resolve, 0));
+    }
+
+    animatedArea.style.display = 'none';
+}
+
+//load page three
+
+async function renderMonEntrys3() {
+    document.documentElement.scrollTop = 0;
+    let animatedArea = document.getElementById('animatedArea');
+    animatedArea.style.display = 'grid';
+
+    let contentRef = document.getElementById('content');
+    contentRef.innerHTML = ""; 
+
+    for (let i = 501; i < 750; i++) {
+        let name = pokeTotal[i].name; 
+        let id = i + 1; 
+        contentRef.innerHTML += getPokeTemplates(name, id, id);
+    
+        await getColor(id); 
+        await new Promise(resolve => setTimeout(resolve, 0));
+    }
+
+    animatedArea.style.display = 'none';
+}
+
+//load page four
+
+async function renderMonEntrys4() {
+    document.documentElement.scrollTop = 0;
+    let animatedArea = document.getElementById('animatedArea');
+    animatedArea.style.display = 'grid';
+
+    let contentRef = document.getElementById('content');
+    contentRef.innerHTML = ""; 
+
+    for (let i = 751; i < 1025; i++) {
+        let name = pokeTotal[i].name; 
+        let id = i + 1; 
+        contentRef.innerHTML += getPokeTemplates(name, id, id);
+    
+        await getColor(id); 
+        await new Promise(resolve => setTimeout(resolve, 0));
+    }
+
+    animatedArea.style.display = 'none';
+}
+
+//load Card Back Side
 
 function renderBackSide(monId) {
     let contentRef = document.getElementById(`card-back-${monId}`);
@@ -151,52 +242,4 @@ function renderBackSide(monId) {
 }
     
 
-function monToArray(results, index) {
-    pokeTotal[index] = results[index]; 
-
-}
-
-function detailToArray (results, a) {
-    monDetail.push(results[a]);
-    console.log(monDetail);
-}
-
-//load Page two
-
-function loadPageTwo() {
-    document.getElementById('content').innerHTML = "";
-    renderMonEntrys2();
-    showButton();
-    hideButton();
-    document.documentElement.scrollTop = 0;
-}
-
-async function renderMonEntrys2() {
-    let animatedArea = document.getElementById('animatedArea');
-    animatedArea.style.display = 'grid';
-
-    let contentRef = document.getElementById('content');
-    contentRef.innerHTML = ""; 
-
-    for (let i = 501; i < 1025; i++) {
-        let name = pokeTotal[i].name; 
-        let id = i + 1; 
-        contentRef.innerHTML += getPokeTemplates(name, id, id);
-    
-        await getColor(id); 
-        await new Promise(resolve => setTimeout(resolve, 0));
-    }
-
-    animatedArea.style.display = 'none';
-}
-
-function showButton() {
-    var x = document.getElementById('back');
-    x.classList.toggle('buttonShow');
-}
-
-function hideButton() {
-    var x = document.getElementById('next');
-    x.classList.toggle('buttonHide');
-}
 
