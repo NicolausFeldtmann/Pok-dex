@@ -137,13 +137,30 @@
         font-size: 48px;
     }
 
+    h3{
+        font-size: 8px;
+    }
+
+    h4{
+        font-size: 8px;
+        margin: 0px;
+    }
+
+    h5{
+        font-size: 8px;
+    }
+
     .card-inner{
         height: 148px;
         width: 88px;
     }
 
-    h3{
-        font-size: 8px;
+    .cardHeader{
+        margin-top: 8px;
+    }
+
+    .card-nav{
+        height: 12px;
     }
 
     .pokeImgArea{

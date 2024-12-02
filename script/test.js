@@ -30,7 +30,7 @@ async function fetchThemAllTest() {
         let responseMon = await response.json();
         monToTest(responseMon); // Übergibt das gesamte `responseMon` Objekt an die Funktion
     }
-    renderTestEntrys();
+    renderTestEntries();
     animatedArea.style.display = 'none';
 }
 
@@ -39,7 +39,7 @@ function monToTest(result) {
     console.log(pokeDetailTest);
 }
 
-function renderTestEntrys() {
+function renderTestEntries() {
     let contentRef = document.getElementById('content');
     contentRef.innerHTML = "";
 
@@ -55,12 +55,19 @@ function renderTestEntrys() {
         let id = i + 1;
         let typeName = pokemon.types[0].type.name; 
         let backgroundColor = colorPoke[typeName];
+        
+        // Holen der ersten drei Moves
+        let moves = pokemon.moves.slice(0, 3).map(move => move.move.name).join(", ");
 
-        contentRef.innerHTML += getTestTemplate(name, id, typeName, backgroundColor);
+        // Template mit Moves übergeben
+        contentRef.innerHTML += getTestTemplate(name, id, typeName, backgroundColor, moves);
     }
 }
 
-function getTestTemplate(name, id, type, backgroundColor) {
+function getTestTemplate(name, id, type, backgroundColor, moves) {
+
+    const moveLines = moves.split(', ').map(move => `<div>${move}</div>`).join('');
+
     return `
         <div class="pokeCard" onclick="this.classList.toggle('flipped'); fetchDetail(${id})">
             <div class="card-inner" style="background-color: ${backgroundColor};" data-pokemon-id="${id}">
@@ -78,6 +85,10 @@ function getTestTemplate(name, id, type, backgroundColor) {
                 </div>
                 <div class="card-back">
                     <div id="card-back-${id}"></div>
+                    <div class="attacks">
+                        <p>ATTACKS:</p>
+                        <div>${moveLines}</div>
+                    </div>
                 </div>
             </div>
         </div>
