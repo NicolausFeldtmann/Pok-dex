@@ -62,6 +62,19 @@
 .pokeCard.flipped .card-inner {
     transform: rotateY(180deg); 
 }
+
+.card-nav{
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    text-transform: uppercase;
+    padding-inline: 8px;
+    height: 24px;
+}
+
 .cardHeader{
     background-color: rgb(94, 154, 213);
     border: solid #FFE361 5px;
@@ -69,9 +82,11 @@
     display: flex;
     justify-content: center;
     text-transform: uppercase;
+    margin-top: 24px;
 }
 
 h3{
+    font-size: 24px;
     font-weight: 100;
     margin: 8px;
     margin-inline: 8px;
@@ -81,7 +96,7 @@ h3{
 h4{
     margin: 0;
     margin-bottom: 8px;
-    font-size: 24px;
+    font-size: 18px;
     color: rgb(62, 62, 62);
 }
 
@@ -89,13 +104,16 @@ h5{
     color: #FFE361;
     font-size: 18px;
     font-weight: 100;
+    font-weight: 100;
+    font-size: 12px;
+    margin: 0;
 }
 
 .pokeImgArea{
     border: solid #FFE361 5px;
     background-color: #fff1d8;
     border-radius: 10px;
-    margin-top: 24px;
+    margin-top: 8px;
     display: flex;
     justify-content: center;
 }

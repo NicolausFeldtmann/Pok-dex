@@ -23,12 +23,13 @@ const pokeColor = {
 
 
 async function init() {
+    currentNames = pokeTotal;
     await getData(); 
 }
 
 async function getData() {
-    await fetchThemAll(); 
-    await fetchDetailForAll();
+    await fetchThemAllTest()  
+    //await fetchDetailForAll();
 }
 
 // get and interpret data
@@ -113,7 +114,7 @@ async function fetchDetail(pokemonId) {
             types: pokemonData.types, 
         };
         renderBackSide(pokemonId);
-        await getColor(pokemonId);
+        //await getColor(pokemonId);
     } catch (error) {
         console.log('Fehler beim Abrufen der Details:');
     }
@@ -150,8 +151,6 @@ async function renderMonEntrys() {
 function loadPageTwo() {
     document.getElementById('content').innerHTML = "";
     renderMonEntrys2();
-    showButton();
-    hideButton();
     document.documentElement.scrollTop = 0;
 }
 
@@ -239,6 +238,11 @@ function renderBackSide(monId) {
     } else {
         console.error('Englischer Flavor-Text nicht gefunden');
     }
+}
+
+function filterAndShowNames(filterWord) {
+    currentNames = pokeTotal.filter( name => name.includes(filterWord))
+    renderBackSide();
 }
     
 
