@@ -1,6 +1,9 @@
 .pokeCard {
     transition: transform 0.5s ease;
     perspective: 1000px;
+    position: relative; /* Stellen Sie sicher, dass die Karte relativ positioniert ist */
+    z-index: 1;        /* Standard-z-index für Karten */
+    margin: 0;
 }
 
 .card-inner {
@@ -35,7 +38,6 @@
 }
 
 .card-front {
-    display: flow;
     background: #9EC884; 
     color: black;
 }
@@ -53,8 +55,13 @@
     transform: scale(1.2); 
 }
 
+.pokeCard.flipped {
+    z-index: 2;
+    position: absolute;
+}
+
 .pokeCard.flipped .card-inner {
-    transform: rotateY(180deg); 
+    transform: rotateY(180deg) scale(1.2);
 }
 
 .card-nav{

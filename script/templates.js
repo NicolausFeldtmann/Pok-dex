@@ -1,4 +1,4 @@
-function getTestTemplate(name, abilities, id, type, backgroundColor, moves, stats) {
+function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stats) {
     const moveLines = moves.split(', ').map(move => `<p>${move}</p>`).join('');
     const statsLines = stats.split(', ').map(stat => `<p>${stat}</p>`).join('');
     const abiLines = abilities.split(', ').map(ability => `<p>${ability}</p>`).join('');

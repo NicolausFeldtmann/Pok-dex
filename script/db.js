@@ -5,5 +5,6 @@ const DETAIL_URL = "https://pokeapi.co/api/v2/pokemon-species/1/";
 let pokeImg = [];
 let monDetail = [];
 let allPokemon = [];
+let currentNames = [];
 
 

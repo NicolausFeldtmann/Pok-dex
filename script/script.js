@@ -20,13 +20,13 @@ let colorPoke = {
     stellar: "rgb(64, 181, 165)",
 };
 
-let pokeDetailTest = [];
 let offset = 0; 
-let LIMIT = 150; 
+let LIMIT = 40; 
 let loadingComplete = false; 
 
 async function init() {
-    await getData(); 
+    await getData();
+    document.getElementById('search').addEventListener('input', filterPokemon); 
 }
 
 async function getData() {
@@ -60,9 +60,30 @@ async function renderMonEntrys() {
         let backgroundColor = colorPoke[typeName];
         let moves = pokemon.moves.slice(0, 3).map(move => move.move.name).join(", ");
         let stats = pokemon.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`).join(", ");
-        contentRef.innerHTML += getTestTemplate(name, abilities, id, typeName, backgroundColor, moves, stats);
+        contentRef.innerHTML += getPokeTemplate(name, abilities, id, typeName, backgroundColor, moves, stats);
     }
     offset += LIMIT; 
+    animatedArea.style.display = 'none'; 
+}
+
+function renderFilteredMonEntrys(filteredPokemon) {
+    const contentRef = document.getElementById('content');
+    const start = offset;
+    const end = offset + LIMIT;
+    const pokemonToRender = filteredPokemon.slice(start, end);
+
+    for (let i = 0; i < pokemonToRender.length; i++) {
+        let pokemon = pokemonToRender[i];
+        let name = pokemon.name;
+        let id = pokemon.id;
+        let typeName = pokemon.types[0].type.name;
+        let abilities = pokemon.abilities.map(ability => ability.ability.name).join(", ");
+        let backgroundColor = colorPoke[typeName];
+        let moves = pokemon.moves.slice(0, 3).map(move => move.move.name).join(", ");
+        let stats = pokemon.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`).join(", ");
+        contentRef.innerHTML += getPokeTemplate(name, abilities, id, typeName, backgroundColor, moves, stats);
+    }
+    offset += LIMIT;
     animatedArea.style.display = 'none'; 
 }
 
@@ -73,6 +94,15 @@ async function fetchInfo(id) {
         .find(entry => entry.language.name === 'en'); 
     const flavorTextContent = flavorText ? flavorText.flavor_text : "Kein Geschmackstext verfügbar";
     document.getElementById(`card-back-${id}`).innerHTML = getBackSideTemplate(flavorTextContent);
+}
+
+function toggleCardOverlay(id) {
+    const overlay = document.getElementById('card-overlay');
+    overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+
+    if (overlay.style.display === 'flex') {
+        fetchInfo(id); 
+    }
 }
 
 function loadMorePokemon() {
@@ -91,9 +121,12 @@ function detailToArray (results, a) {
     monDetail.push(results[a]);
 }
 
-function filterAndShowNames(filterWord) {
-    currentNames = pokeTotal.filter( name => name.includes(filterWord))
-    renderBackSide();
+function filterPokemon() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const filteredPokemon = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
+    offset = 0;
+    document.getElementById('content').innerHTML = '';
+    renderFilteredMonEntrys(filteredPokemon);
 }
     
 
