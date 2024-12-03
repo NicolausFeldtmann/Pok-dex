@@ -4,8 +4,6 @@
     }
 }
 
-
-
  @media (max-width: 1300px) {
     h1{
         font-size: 180px;
@@ -64,8 +62,6 @@
         max-width: 132px;
     }
  }
-
-
 
  @media (max-width: 660px) {
 
@@ -155,8 +151,6 @@
         100% { transform: translateX(0%); }
  }
 }
-
-
 
  @media (max-width: 400px) {
 

@@ -1,4 +1,4 @@
-const pokeColor = {
+let colorPoke = {
     normal: "rgb(206, 206, 206)",
     fire: "rgb(255, 107, 107)",
     fighting: "rgb(255, 128, 0)",
@@ -20,224 +20,75 @@ const pokeColor = {
     stellar: "rgb(64, 181, 165)",
 };
 
-
+let pokeDetailTest = [];
+let offset = 0; 
+let LIMIT = 150; 
+let loadingComplete = false; 
 
 async function init() {
-    currentNames = pokeTotal;
     await getData(); 
 }
 
 async function getData() {
-    await fetchThemAllTest()  
-    //await fetchDetailForAll();
+    await fetchThemAll();
 }
 
 // get and interpret data
-
-function getColor(monId) {
-    const mon = monDetail[monId - 1]; 
-    
-    if (!mon || !mon.types || mon.types.length === 0) {
-        console.warn(`Keine Typeninformationen für Pokémon mit ID ${monId} gefunden.`);
-        return;
-    }
-
-    const types = mon.types.map(typeInfo => typeInfo.type.name);
-    const validTypes = types.filter(type => pokeColor[type]);
-
-    if (validTypes.length === 0) {
-        console.warn(`Keine gültigen Farbtypen für Pokémon mit ID ${monId} gefunden.`);
-        return; 
-    }
-
-    const backgroundColor = validTypes.map(type => pokeColor[type])[0] || "rgb(206, 206, 206)";
-
-    const cardInner = document.querySelector(`.card-inner[data-pokemon-id="${monId}"]`);
-    if (cardInner) {
-        cardInner.style.backgroundColor = backgroundColor;
-
-        const cardFront = cardInner.querySelector('.card-front');
-        if (cardFront) {
-            cardFront.style.backgroundColor = backgroundColor; 
-        } else {
-            console.warn(`card-front Element für Pokémon mit ID ${monId} nicht gefunden.`);
-        }
-    } else {
-        console.warn(`Element für Pokémon mit ID ${monId} nicht gefunden.`);
-    }
-}
-
-async function fetchDetailForAll() {
-    for (let i = 1; i <= pokeTotal.length; i++) {
-        await fetchDetail(i); 
-    }
-}
-
 async function fetchThemAll() {
-    let animatedArea = document.getElementById('animatedArea');
-    animatedArea.style.display = 'grid';
-
-    let response = await fetch(BASE_URL); 
-    let responseMon = await response.json();
-    const results = responseMon.results;
-
-    pokeTotal = []; 
-    for (let i = 0; i < results.length; i++) {
-        monToArray(results, i); 
+    for (let i = 1; i <= 1025; i++) { 
+        let response = await fetch(DETAIL_URL_BASE + i + "/");
+        let responseMon = await response.json();
+        allPokemon.push(responseMon);
     }
-    renderMonEntrys(); 
-    animatedArea.style.display = 'none';
+    loadingComplete = true; 
+    if (allPokemon.length > 0) {
+        renderMonEntrys(); 
+    }
 }
 
-async function fetchDetail(pokemonId) {
-    try {
-        if (pokemonId === undefined) {
-            throw new Error("Pokemon-ID ist undefined");
-        }
-
-        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`);
-        if (!response.ok) {
-            throw new Error(`HTTP-Fehler beim Abrufen der Pokémon-Daten! Status: ${response.status}`);
-        }
-        let pokemonData = await response.json();
-
-        let speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`);
-        if (!speciesResponse.ok) {
-            throw new Error(`HTTP-Fehler beim Abrufen der Spezies-Daten! Status: ${speciesResponse.status}`);
-        }
-        let speciesData = await speciesResponse.json();
-
-        monDetail[pokemonId - 1] = {
-            ...pokemonData,
-            flavor_text_entries: speciesData.flavor_text_entries,
-            color: speciesData.color,
-            types: pokemonData.types, 
-        };
-        renderBackSide(pokemonId);
-        //await getColor(pokemonId);
-    } catch (error) {
-        console.log('Fehler beim Abrufen der Details:');
+async function renderMonEntrys() {
+    let contentRef = document.getElementById('content');
+    let start = offset;
+    let end = offset + LIMIT;
+    let pokemonToRender = allPokemon.slice(start, end);
+    for (let i = 0; i < pokemonToRender.length; i++) {
+        let pokemon = pokemonToRender[i];
+        let name = pokemon.name;
+        let id = start + i + 1; 
+        let typeName = pokemon.types[0].type.name;
+        let abilities = pokemon.abilities.map(ability => ability.ability.name).join(", "); 
+        let backgroundColor = colorPoke[typeName];
+        let moves = pokemon.moves.slice(0, 3).map(move => move.move.name).join(", ");
+        let stats = pokemon.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`).join(", ");
+        contentRef.innerHTML += getTestTemplate(name, abilities, id, typeName, backgroundColor, moves, stats);
     }
+    offset += LIMIT; 
+    animatedArea.style.display = 'none'; 
+}
+
+async function fetchInfo(id) {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
+    const responseDetail = await response.json();
+    const flavorText = responseDetail.flavor_text_entries
+        .find(entry => entry.language.name === 'en'); 
+    const flavorTextContent = flavorText ? flavorText.flavor_text : "Kein Geschmackstext verfügbar";
+    document.getElementById(`card-back-${id}`).innerHTML = getBackSideTemplate(flavorTextContent);
+}
+
+function loadMorePokemon() {
+    animatedArea.style.display = 'block'; 
+    setTimeout(() => {
+        renderMonEntrys(); 
+        animatedArea.style.display = 'none'; 
+    }, 100); 
 }
 
 function monToArray(results, index) {
     pokeTotal[index] = results[index]; 
-
 }
 
 function detailToArray (results, a) {
     monDetail.push(results[a]);
-    console.log(monDetail);
-}
-
-//load Page one
-
-async function renderMonEntrys() {
-    document.documentElement.scrollTop = 0;
-    let contentRef = document.getElementById('content');
-    contentRef.innerHTML = ""; 
-
-    for (let i = 0; i < 250; i++) {
-        let name = pokeTotal[i].name;
-        let id = i + 1; 
-        contentRef.innerHTML += getPokeTemplates(name, id, id);
-        
-        await getColor(id);
-    }
-}
-
-//load Page two
-
-function loadPageTwo() {
-    document.getElementById('content').innerHTML = "";
-    renderMonEntrys2();
-    document.documentElement.scrollTop = 0;
-}
-
-async function renderMonEntrys2() {
-    document.documentElement.scrollTop = 0;
-    let animatedArea = document.getElementById('animatedArea');
-    animatedArea.style.display = 'grid';
-
-    let contentRef = document.getElementById('content');
-    contentRef.innerHTML = ""; 
-
-    for (let i = 251; i < 500; i++) {
-        let name = pokeTotal[i].name; 
-        let id = i + 1; 
-        contentRef.innerHTML += getPokeTemplates(name, id, id);
-    
-        await getColor(id); 
-        await new Promise(resolve => setTimeout(resolve, 0));
-    }
-
-    animatedArea.style.display = 'none';
-}
-
-//load page three
-
-async function renderMonEntrys3() {
-    document.documentElement.scrollTop = 0;
-    let animatedArea = document.getElementById('animatedArea');
-    animatedArea.style.display = 'grid';
-
-    let contentRef = document.getElementById('content');
-    contentRef.innerHTML = ""; 
-
-    for (let i = 501; i < 750; i++) {
-        let name = pokeTotal[i].name; 
-        let id = i + 1; 
-        contentRef.innerHTML += getPokeTemplates(name, id, id);
-    
-        await getColor(id); 
-        await new Promise(resolve => setTimeout(resolve, 0));
-    }
-
-    animatedArea.style.display = 'none';
-}
-
-//load page four
-
-async function renderMonEntrys4() {
-    document.documentElement.scrollTop = 0;
-    let animatedArea = document.getElementById('animatedArea');
-    animatedArea.style.display = 'grid';
-
-    let contentRef = document.getElementById('content');
-    contentRef.innerHTML = ""; 
-
-    for (let i = 751; i < 1025; i++) {
-        let name = pokeTotal[i].name; 
-        let id = i + 1; 
-        contentRef.innerHTML += getPokeTemplates(name, id, id);
-    
-        await getColor(id); 
-        await new Promise(resolve => setTimeout(resolve, 0));
-    }
-
-    animatedArea.style.display = 'none';
-}
-
-//load Card Back Side
-
-function renderBackSide(monId) {
-    let contentRef = document.getElementById(`card-back-${monId}`);
-    contentRef.innerHTML = "";
-
-    if (!monDetail || monDetail.length === 0) {
-        return;
-    }
-
-    const flavorTextEntries = monDetail[monId - 1]?.flavor_text_entries;
-    const englishFlavorText = flavorTextEntries?.find(entry => entry.language.name === 'en');
-
-    if (englishFlavorText) {
-        let info = englishFlavorText.flavor_text
-            .replace(/\u000C/g, ' ').trim(); 
-        contentRef.innerHTML += getBackSideTemplate(info);
-    } else {
-        console.error('Englischer Flavor-Text nicht gefunden');
-    }
 }
 
 function filterAndShowNames(filterWord) {
