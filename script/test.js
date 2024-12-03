@@ -23,36 +23,34 @@ const colorPoke = {
 };
 
 let pokeDetailTest = [];
+let offset = 0; 
+let LIMIT = 150; 
+let loadingComplete = false; 
 
 async function fetchThemAllTest() {
-    for (let i = 1; i <= 151; i++) {
+    for (let i = 1; i <= 1025; i++) { 
         let response = await fetch(DETAIL_URL_BASE + i + "/");
         let responseMon = await response.json();
-        monToTest(responseMon);
+        allPokemonDetails.push(responseMon);
     }
-    renderTestEntries();
-    animatedArea.style.display = 'none';
-}
+    loadingComplete = true; 
 
-function monToTest(result) { 
-    pokeDetailTest.push(result);
-    console.log(pokeDetailTest);
+    if (allPokemonDetails.length > 0) {
+        renderTestEntries(); 
+    }
 }
 
 function renderTestEntries() {
     let contentRef = document.getElementById('content');
     contentRef.innerHTML = "";
+    let start = offset;
+    let end = offset + LIMIT;
+    let pokemonToRender = allPokemonDetails.slice(start, end);
 
-    for (let i = 0; i < pokeDetailTest.length; i++) {
-        let pokemon = pokeDetailTest[i];
-
-        if (!pokemon || !pokemon.types || pokemon.types.length === 0) {
-            console.warn(`Pokémon-Daten an Index ${i} sind ungültig oder haben keine Typen.`);
-            continue; 
-        }
-
+    for (let i = 0; i < pokemonToRender.length; i++) {
+        let pokemon = pokemonToRender[i];
         let name = pokemon.name;
-        let id = i + 1;
+        let id = start + i + 1; 
         let typeName = pokemon.types[0].type.name;
         let abilities = pokemon.abilities.map(ability => ability.ability.name).join(", "); 
         let backgroundColor = colorPoke[typeName];
@@ -61,6 +59,18 @@ function renderTestEntries() {
 
         contentRef.innerHTML += getTestTemplate(name, abilities, id, typeName, backgroundColor, moves, stats);
     }
+    offset += LIMIT; 
+    animatedArea.style.display = 'none'; 
+}
+
+
+function loadMorePokemon() {
+    animatedArea.style.display = 'block'; 
+
+    setTimeout(() => {
+        renderTestEntries(); 
+        animatedArea.style.display = 'none'; 
+    }, 100); 
 }
 
 function getTestTemplate(name, abilities, id, type, backgroundColor, moves, stats) {

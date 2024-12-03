@@ -85,10 +85,6 @@
         width: 85%;
     }
 
-    .bottomArea{
-        display: ruby;
-    }
-
     .bottomBox{
         margin-top: 12px;
         margin-bottom: 12px;
@@ -145,6 +141,10 @@
         padding: 6px;
     }
 
+    .abs{
+        margin-top: 4px;
+    }
+
     @keyframes wobble {
         0% { transform: translateX(0%); }
         15% { transform: translateX(-10%) rotate(-5deg); }
@@ -159,17 +159,23 @@
 
 
  @media (max-width: 400px) {
+
+    .pokeDisplay{
+        padding: 16px;
+    }
+
     h1{
         font-size: 48px;
     }
 
     h3{
-        font-size: 8px;
+        font-size: 12px;
     }
 
     h4{
         font-size: 8px;
         margin: 0px;
+        border: solid #FFE361 4px;
     }
 
     h5{
@@ -178,11 +184,13 @@
 
     h6{
         font-size: 8px;
+        border: solid #FFE361 4px;
     }
 
     .card-inner{
-        height: 148px;
-        width: 88px;
+        height: 232px;
+        width: 100px;
+        margin: 4px;
     }
 
     .card-front{
@@ -220,6 +228,11 @@
 
     .messageInside{
         padding: 8px;
+    }
+
+    .abs{
+        padding: 4px;
+        border: solid #FFE361 4px;
     }
 
     @keyframes wobble {
