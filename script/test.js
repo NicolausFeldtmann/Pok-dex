@@ -22,13 +22,13 @@ const colorPoke = {
     stellar: "rgb(64, 181, 165)",
 };
 
-let pokeDetailTest = []; // Nur einmal deklarieren
+let pokeDetailTest = [];
 
 async function fetchThemAllTest() {
-    for (let i = 1; i <= 151; i++) { // z.B. für die ersten 10 Pokémon
+    for (let i = 1; i <= 151; i++) {
         let response = await fetch(DETAIL_URL_BASE + i + "/");
         let responseMon = await response.json();
-        monToTest(responseMon); // Übergibt das gesamte `responseMon` Objekt an die Funktion
+        monToTest(responseMon);
     }
     renderTestEntries();
     animatedArea.style.display = 'none';
@@ -53,20 +53,21 @@ function renderTestEntries() {
 
         let name = pokemon.name;
         let id = i + 1;
-        let typeName = pokemon.types[0].type.name; 
+        let typeName = pokemon.types[0].type.name;
+        let abilities = pokemon.abilities.map(ability => ability.ability.name).join(", "); 
         let backgroundColor = colorPoke[typeName];
-        
-        // Holen der ersten drei Moves
         let moves = pokemon.moves.slice(0, 3).map(move => move.move.name).join(", ");
+        let stats = pokemon.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`).join(", ");
 
-        // Template mit Moves übergeben
-        contentRef.innerHTML += getTestTemplate(name, id, typeName, backgroundColor, moves);
+        contentRef.innerHTML += getTestTemplate(name, abilities, id, typeName, backgroundColor, moves, stats);
     }
 }
 
-function getTestTemplate(name, id, type, backgroundColor, moves) {
+function getTestTemplate(name, abilities, id, type, backgroundColor, moves, stats) {
 
-    const moveLines = moves.split(', ').map(move => `<div>${move}</div>`).join('');
+    const moveLines = moves.split(', ').map(move => `<p>${move}</p>`).join('');
+    const statsLines = stats.split(', ').map(stat => `<p>${stat}</p>`).join('');
+    const abiLines = abilities.split(', ').map(ability => `<p>${ability}</p>`).join('');
 
     return `
         <div class="pokeCard" onclick="this.classList.toggle('flipped'); fetchDetail(${id})">
@@ -74,7 +75,7 @@ function getTestTemplate(name, id, type, backgroundColor, moves) {
                 <div class="card-front" style="background-color: ${backgroundColor};">
                     <div class="card-nav">
                         <h4>#${id}</h4>
-                        <h5>${type}</h5>
+                        <h6>${type}</h6>
                     </div>
                     <div class="cardHeader">
                         <h3>${name.charAt(0).toUpperCase() + name.slice(1)}</h3>
@@ -82,12 +83,22 @@ function getTestTemplate(name, id, type, backgroundColor, moves) {
                     <div class="pokeImgArea">
                         <img class="pokeImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png" alt="${name}">
                     </div>
+                        <div class="abs">
+                            <h6>ABILITIES:</h6>
+                            <div>${abiLines}</div>
+                        </div>
                 </div>
                 <div class="card-back">
+                
                     <div id="card-back-${id}"></div>
-                    <div class="attacks">
-                        <p>ATTACKS:</p>
-                        <div>${moveLines}</div>
+                        <div class="attacks">
+                            <h6>ATTACKS:</h6>
+                            <div>${moveLines}</div>
+                        </div>
+                        <div class="stats">
+                            <h6>STATS:</h6>
+                            <div>${statsLines}</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,8 +107,8 @@ function getTestTemplate(name, id, type, backgroundColor, moves) {
 }
 
 function calculateSomething() {
-    console.log(number); // Hier muss `number` deklariert sein.
+    console.log(number);
 }
 
-let number = 1; // `number` vor der Verwendung deklarieren
+let number = 1;
 calculateSomething();

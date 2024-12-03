@@ -32,7 +32,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     font-size: 20px;
     border-radius: 15px;
 }
@@ -46,11 +45,9 @@
 .card-back {
     transform: rotateY(180deg); 
     text-align: center;
-    padding: 8px;
     width: auto;
     text-transform: uppercase;
     padding-inline: 8px;
-    padding: 8px;
 }
 
 .pokeCard:hover {
@@ -76,11 +73,11 @@
     display: flex;
     justify-content: center;
     text-transform: uppercase;
-    margin-top: 12px;
+    width: 180px;
 }
 
 h3{
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 100;
     margin: 8px;
     margin-inline: 8px;
@@ -89,7 +86,7 @@ h3{
 
 h4{
     margin: 0;
-    font-size: 12px;
+    font-size: 18px;
     color: rgb(62, 62, 62);
     background-color: rgb(94, 154, 213);
     border: solid #FFE361 5px;
@@ -103,10 +100,9 @@ h4{
 
 h5{
     color: #FFE361;
-    font-size: 18px;
-    font-weight: 100;
-    font-weight: 100;
     font-size: 12px;
+    font-weight: 100;
+    font-weight: 100;
     margin: 0;
     background-color: rgb(94, 154, 213);
     border: solid #FFE361 5px;
@@ -118,9 +114,22 @@ h5{
     padding-inline: 8px;
 }
 
+h6{
+    color: #FFE361;
+    font-size: 12px;
+    font-weight: 100;
+    font-weight: 100;
+    margin: 0;
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    border-radius: 10px;
+    padding-inline: 8px;
+    margin-bottom: 8px;
+}
+
 p{
-    font-size: 16px;
-    margin-top: 0px;
+    font-size: 10px;
+    margin: 0px;
 }
 
 .pokeImgArea{
@@ -133,7 +142,7 @@ p{
 }
 
 .pokeImg{
-    width: 200px;
+    width: 124px;
 }
 
 .pokeInfoArea{
@@ -148,7 +157,7 @@ p{
     font-size: 18px;
     font-weight: 100;
     font-weight: 100;
-    font-size: 12px;
+    font-size: 16px;
     margin: 0;
     background-color: rgb(94, 154, 213);
     border: solid #FFE361 5px;
@@ -162,6 +171,48 @@ p{
     padding-inline: 8px;
     margin-top: 12px;
     padding: 8px;
+}
+
+.stats{
+    color: #FFE361;
+    font-size: 18px;
+    font-weight: 100;
+    font-weight: 100;
+    font-size: 16px;
+    margin: 0;
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    text-align: left;
+    flex-direction: column;
+    text-transform: uppercase;
+    padding-inline: 8px;
+    margin-top: 12px;
+    padding: 8px;
+}
+
+.abs{
+    color: #FFE361;
+    font-size: 18px;
+    font-weight: 100;
+    font-weight: 100;
+    font-size: 16px;
+    margin: 0;
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    text-align: left;
+    flex-direction: column;
+    text-transform: uppercase;
+    padding-inline: 8px;
+    margin-top: 12px;
+    padding: 8px; 
 }
 
 .infoIcon{
