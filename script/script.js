@@ -22,7 +22,8 @@ let colorPoke = {
 
 let offset = 0; 
 let LIMIT = 40; 
-let loadingComplete = false; 
+let loadingComplete = false;
+let previousId = null; 
 
 async function init() {
     await getData();
@@ -71,7 +72,6 @@ function renderFilteredMonEntrys(filteredPokemon) {
     const start = offset;
     const end = offset + LIMIT;
     const pokemonToRender = filteredPokemon.slice(start, end);
-
     for (let i = 0; i < pokemonToRender.length; i++) {
         let pokemon = pokemonToRender[i];
         let name = pokemon.name;
@@ -91,9 +91,14 @@ async function fetchInfo(id) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
     const responseDetail = await response.json();
     const flavorText = responseDetail.flavor_text_entries
-        .find(entry => entry.language.name === 'en'); 
+        .find(entry => entry.language.name === 'en');
     const flavorTextContent = flavorText ? flavorText.flavor_text : "Kein Geschmackstext verfügbar";
     document.getElementById(`card-back-${id}`).innerHTML = getBackSideTemplate(flavorTextContent);
+    // Überprüfen Sie, ob das Overlay angezeigt wird, nachdem die Informationen geladen wurden
+    const overlay = document.getElementById('card-overlay');
+    if (overlay) {
+        overlay.style.display = 'flex'; // Aktivieren Sie das Overlay
+    }
 }
 
 function toggleCardOverlay(id) {
@@ -128,6 +133,28 @@ function filterPokemon() {
     document.getElementById('content').innerHTML = '';
     renderFilteredMonEntrys(filteredPokemon);
 }
+
+function toggleFlip(card, id, previousId) {
+    card.classList.toggle('flipped');
+    const blurEffect = document.querySelector('.blur-effect');
     
+    if (card.classList.contains('flipped')) {
+        blurEffect.style.display = 'block'; 
+        fetchInfo(id);  // Ruft die Informationen für die aktuelle ID ab
+    } else {
+        if (previousId > 0) { // Stellen Sie sicher, dass die vorherige ID gültig ist
+            fetchInfo(previousId);  // Ruft die Informationen für die vorherige ID ab
+        }
+        blurEffect.style.display = 'none'; 
+    }
+}
+
+function backFlip(card, currentId, previousId) {
+    if (previousId > 0) { // Überprüfen, dass die vorherige ID gültig ist
+        fetchInfo(previousId); // Ruft die Informationen für die vorherige ID ab
+    } else {
+        alert("Es gibt kein vorheriges Pokémon."); // Optionale Benutzerwarnung
+    }
+}
 
 

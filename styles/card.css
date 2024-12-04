@@ -1,8 +1,8 @@
 .pokeCard {
     transition: transform 0.5s ease;
     perspective: 1000px;
-    position: relative; /* Stellen Sie sicher, dass die Karte relativ positioniert ist */
-    z-index: 1;        /* Standard-z-index für Karten */
+    position: relative; 
+    z-index: 1;        
     margin: 0;
 }
 
@@ -50,19 +50,48 @@
     padding-inline: 8px;
 }
 
+.backHead{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
 .pokeCard:hover {
     cursor: pointer;
     transform: scale(1.2); 
 }
 
 .pokeCard.flipped {
-    z-index: 2;
-    position: absolute;
+    z-index: 5;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
 
 .pokeCard.flipped .card-inner {
     transform: rotateY(180deg) scale(1.2);
+    width: 312px;
+    height: 424px;
 }
+
+.blur-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); /* Optional */
+    backdrop-filter: blur(10px); /* Unschärfe */
+    display: none; /* Standardmäßig nicht sichtbar */
+    z-index: 3; /* Z-Index für den Blur-Effekt */
+}
+
+.pokeCard.flipped + .blur-effect {
+    display: block; /* Zeige Blur an, wenn Karte geflippt ist */
+}
+
 
 .card-nav{
     display: flex;
@@ -229,4 +258,45 @@ p{
     width: 64px;
     height: 64px;
 }
+
+.cardFooter{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+}
+
+.arrowBox{
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s ease;
+}
+
+.arrowBox:hover{
+    cursor: pointer;
+    transform: translate3d(0, 5px, 0);
+}
+
+.arrowLeaft {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #FFE361; 
+    margin: 8px;
+    rotate: -90deg; 
+}
+
+.arrowRigth{
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #FFE361; 
+    margin: 8px;
+    rotate: 90deg;
+}
+
 

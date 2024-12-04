@@ -4,7 +4,6 @@ body{
     color: rgb(228, 208, 62);
     font-family: titan one;
     font-weight: 100;
-    overflow: hidden; /* Deaktivieren Sie das Scrollen der Seite */
 }
 
 header{
@@ -61,6 +60,7 @@ h1{
 }
 
 .content{
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
