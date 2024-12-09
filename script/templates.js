@@ -3,9 +3,9 @@ function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stat
     const statsLines = stats.split(', ').map(stat => `<p>${stat}</p>`).join('');
     const abiLines = abilities.split(', ').map(ability => `<p>${ability}</p>`).join('');
     return `
-        <div class="pokeCard" onclick="toggleFlip(this, ${id})">
+        <div class="pokeCard" data-id="${id}" onclick="toggleFlip(this, ${id})">
             <div class="card-inner" style="background-color: ${backgroundColor};">
-                <div class="card-front" style="background-color: ${backgroundColor};">
+                <div class="card-front" style="background-color: ${backgroundColor};"onclick="toggleFlip(this, ${id})">
                     <div class="card-nav">
                         <h4>#${id}</h4>
                         <h6>${type}</h6>
@@ -38,12 +38,8 @@ function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stat
                         <div>${statsLines}</div>
                     </div>
                     <div class="cardFooter">
-                        <div class="arrowBox" onclick="backFlip(this.closest('.pokeCard'))">
-                            <div class="arrowLeaft"></div>
-                        </div>
-                        <div class="arrowBox">
-                            <div class="arrowRigth"></div>
-                        </div>
+                        <button onclick="backFlip(this, ${id})">Back</button>
+                        <button onclick="frontFlip(this, ${id})">FORWARD</button>
                     </div>
                 </div>
             </div>

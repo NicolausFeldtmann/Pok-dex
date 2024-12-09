@@ -36,7 +36,6 @@ async function getData() {
 
 // get and interpret data
 
-
 async function fetchThemAll() {
     for (let i = 1; i <= 1025; i++) { 
         let response = await fetch(DETAIL_URL_BASE + i + "/");
@@ -50,23 +49,21 @@ async function fetchThemAll() {
 }
 
 async function renderMonEntrys() {
+    if (allPokemon.length < 40) return; 
     let contentRef = document.getElementById('content');
-    let start = offset;
-    let end = offset + LIMIT;
-    let pokemonToRender = allPokemon.slice(start, end);
-    for (let i = 0; i < pokemonToRender.length; i++) {
-        let pokemon = pokemonToRender[i];
-        let name = pokemon.name;
-        let id = start + i + 1; 
-        let typeName = pokemon.types[0].type.name;
-        let abilities = pokemon.abilities.map(ability => ability.ability.name).join(", "); 
-        let backgroundColor = colorPoke[typeName];
-        let moves = pokemon.moves.slice(0, 3).map(move => move.move.name).join(", ");
-        let stats = pokemon.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`).join(", ");
-        contentRef.innerHTML += getPokeTemplate(name, abilities, id, typeName, backgroundColor, moves, stats);
-    }
-    offset += LIMIT; 
-    animatedArea.style.display = 'none'; 
+    allPokemon.slice(offset, offset + LIMIT).forEach((pokemon, i) => {
+        contentRef.innerHTML += getPokeTemplate(
+            pokemon.name,
+            pokemon.abilities.map(a => a.ability.name).join(", "),
+            offset + i + 1,
+            pokemon.types[0].type.name,
+            colorPoke[pokemon.types[0].type.name],
+            pokemon.moves.slice(0, 3).map(m => m.move.name).join(", "),
+            pokemon.stats.map(s => `${s.stat.name}: ${s.base_stat}`).join(", ")
+        );
+    });
+    offset += LIMIT;
+    animatedArea.style.display = 'none';
 }
 
 //Interaktion mit der Seite
@@ -76,7 +73,7 @@ function loadMorePokemon() {
     setTimeout(() => {
         renderMonEntrys(); 
         animatedArea.style.display = 'none'; 
-    }, 100); 
+    }, 1000); 
 }
 
 function filterPokemon() {
@@ -98,17 +95,33 @@ function toggleFlip(card) {
         blurEffect.style.display = 'block'; 
     } else {blurEffect.style.display = 'none'; 
     }
+    console.log('toggel');
+    
 }
 
-function backFlip(card) {
-    const currentId = parseInt(card.querySelector('.card-nav h4').textContent.replace('#', ''));e
-    card.classList.toggle('flipped');
+function backFlip(card, id) {
+    toggleFlip(card);
 
-    const previousCardId = currentId - 1;
-    const previousCard = document.querySelector(`.pokeCard[data-id="${previousCardId}"]`);
+    setTimeout(() => {
+        if (id > 1) { 
+            let previousCard = document.querySelector(`.pokeCard[data-id="${id - 1}"]`);
+            if (previousCard) {
+                toggleFlip(previousCard);
+            }
+        }
+    }, 1000);
+}
 
-    if (previousCard) {
-        previousCard.classList.toggle('flipped');
-    }
+function frontFlip(card, id) {
+    toggleFlip(card);
+
+    setTimeout(() => {
+        if (id < 1025) {
+            let nextCard = document.querySelector(`.pokeCard[data-id="${id + 1}"]`);
+            if (nextCard) {
+                toggleFlip(nextCard);
+            }
+        }
+    }, 1000);
 }
 

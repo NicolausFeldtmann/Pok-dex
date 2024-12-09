@@ -113,14 +113,13 @@
 h3{
     font-size: 24px;
     font-weight: 100;
-    margin: 8px;
-    margin-inline: 8px;
+    margin: 0px 8px 0px 8px;
     color: #FFE361;
 }
 
 h4{
     margin: 0;
-    font-size: 18px;
+    font-size: 24px;
     color: rgb(62, 62, 62);
     background-color: rgb(94, 154, 213);
     border: solid #FFE361 5px;
@@ -130,6 +129,7 @@ h4{
     align-items: baseline;
     text-transform: uppercase;
     padding-inline: 8px;
+    margin: 0px 8px 0px 8px;
 }
 
 h5{
@@ -150,7 +150,7 @@ h5{
 
 h6{
     color: #FFE361;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 100;
     font-weight: 100;
     margin: 0;
@@ -162,7 +162,7 @@ h6{
 }
 
 p{
-    font-size: 10px;
+    font-size: 12px;
     margin: 0px;
 }
 
@@ -297,6 +297,25 @@ p{
     border-bottom: 20px solid #FFE361; 
     margin: 8px;
     rotate: 90deg;
+}
+
+button{
+    font-family: titan one;
+    font-weight: 100;
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    color: #FFE361;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    padding: 8px;
+    box-shadow: 7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066), 12.4px 19.6px 10px rgba(0, 0, 0, 0.095), 18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124), 40px 63px 80px rgba(0, 0, 0, 0.19);
+}
+
+button:hover{
+    cursor: pointer;
+    transform: translate3d(0, 5px, 0);
 }
 
 
