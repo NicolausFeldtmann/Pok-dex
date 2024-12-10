@@ -6,6 +6,10 @@ body{
     font-weight: 100;
 }
 
+.body-no-scroll {
+    overflow: hidden; 
+}
+
 header{
     display: flex;
     justify-content: center;

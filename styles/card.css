@@ -6,7 +6,7 @@
     margin: 0;
 }
 
-.card-inner {
+.cardInner {
     border: solid #FFE361 12px;
     border-radius: 15px;
     background-color: #9EC884;
@@ -27,7 +27,7 @@
     transform-style: preserve-3d; 
 }
 
-.card-front, .card-back {
+.cardFront, .cardBack {
     position: absolute;
     backface-visibility: hidden; 
     display: flex;
@@ -37,12 +37,12 @@
     border-radius: 15px;
 }
 
-.card-front {
+.cardFront {
     background: #9EC884; 
     color: black;
 }
 
-.card-back {
+.cardBack {
     transform: rotateY(180deg); 
     text-align: center;
     width: auto;
@@ -70,7 +70,7 @@
     transform: translate(-50%, -50%); 
 }
 
-.pokeCard.flipped .card-inner {
+.pokeCard.flipped .cardInner {
     transform: rotateY(180deg) scale(1.2);
     width: 312px;
     height: 424px;
@@ -82,14 +82,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5); /* Optional */
-    backdrop-filter: blur(10px); /* Unschärfe */
-    display: none; /* Standardmäßig nicht sichtbar */
-    z-index: 3; /* Z-Index für den Blur-Effekt */
+    background: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(10px); 
+    display: none; 
+    z-index: 3; 
 }
 
 .pokeCard.flipped + .blur-effect {
-    display: block; /* Zeige Blur an, wenn Karte geflippt ist */
+    display: block; 
 }
 
 
@@ -263,40 +263,6 @@ p{
     display: flex;
     justify-content: space-around;
     margin-top: 12px;
-}
-
-.arrowBox{
-    background-color: rgb(94, 154, 213);
-    border: solid #FFE361 5px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    transition: transform 0.5s ease;
-}
-
-.arrowBox:hover{
-    cursor: pointer;
-    transform: translate3d(0, 5px, 0);
-}
-
-.arrowLeaft {
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid #FFE361; 
-    margin: 8px;
-    rotate: -90deg; 
-}
-
-.arrowRigth{
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 20px solid #FFE361; 
-    margin: 8px;
-    rotate: 90deg;
 }
 
 button{

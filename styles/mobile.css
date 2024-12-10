@@ -20,6 +20,20 @@
 
  @media (max-width: 945px) {
 
+    .pokeCard:hover {
+        cursor: auto;
+        transform: none; 
+    }
+
+    button:hover{
+        cursor: auto;
+        transform: none;
+    }
+
+    .bottomBox:hover{
+        transform: none;
+    }
+
     .cardHeader{
         width: auto;
     }
@@ -29,12 +43,12 @@
     }
 
     h3{
-        font-size: 30px;
+        font-size: 18px;
     }
 
     
     h4{
-        font-size: 30px;
+        font-size: 18px;
     }
 
     h5{
@@ -49,12 +63,12 @@
         margin-inline: 8px;
     }
 
-    .card-inner{
+    .cardInner{
         height: 312px;
         width: 148px;
     }
 
-    .card-front{
+    .cardFront{
         max-width: 148px;
     }
 
@@ -71,6 +85,7 @@
         margin-bottom: 16;
         position: relative;
         z-index: 9;
+        transform: translate(-50%, -50%);
     }
 
     .pokeCard:hover{
@@ -95,6 +110,10 @@
     }
 
     h3{
+        font-size: 12px;
+    }
+
+    h4{
         font-size: 12px;
     }
 
@@ -167,7 +186,7 @@
     }
 
     h4{
-        font-size: 20px;
+        font-size: 12px;
         margin: 0px;
         border: solid #FFE361 4px;
     }
@@ -227,6 +246,10 @@
     .abs{
         padding: 4px;
         border: solid #FFE361 4px;
+    }
+
+    .backHead{
+        align-items: baseline;
     }
 
     @keyframes wobble {
