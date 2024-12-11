@@ -20,9 +20,16 @@
 
  @media (max-width: 945px) {
 
-    .pokeCard:hover {
-        cursor: auto;
-        transform: none; 
+    .pokeCard:hover{
+        transform: scale(1);
+    }
+
+    .pokeCard.flipped {
+        z-index: 5;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
     }
 
     button:hover{
@@ -79,17 +86,10 @@
 
  @media (max-width: 660px) {
 
-    .pokeCard.flipped .card-inner{
-        width: 180px;
-        height: 320px;
-        margin-bottom: 16;
-        position: relative;
+    .pokeCard.flipped .cardInner{
+        width: 236px;
+        height: 344px;
         z-index: 9;
-        transform: translate(-50%, -50%);
-    }
-
-    .pokeCard:hover{
-        transform: scale(1);
     }
 
     .pokeDisplay{
@@ -125,7 +125,7 @@
         font-size: 8px;
     }
 
-    .card-inner{
+    .cardInner{
         height: 240px;
         width: 100px;
         margin: 8px;
@@ -200,13 +200,13 @@
         border: solid #FFE361 4px;
     }
 
-    .card-inner{
+    .cardInner{
         height: 232px;
         width: 100px;
         margin: 4px;
     }
 
-    .card-front{
+    .cardFront{
         max-width: 96px;
     }
 

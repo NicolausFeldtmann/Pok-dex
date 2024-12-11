@@ -6,6 +6,11 @@ body{
     font-weight: 100;
 }
 
+nav{
+    display: flex;
+    justify-content: center;
+}
+
 .body-no-scroll {
     overflow: hidden; 
 }
@@ -24,11 +29,13 @@ header{
 .search{
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 24px;
+    width: fit-content;
 }
 
 .searchField{
-    background-color: rgb(94, 154, 213);
+    background-color: #5e9ad5;
     color: #F7C505;
     padding: 8px;
     border-radius: 30px;
@@ -39,6 +46,20 @@ header{
     font-size: 24px;
     font-family: titan one;
     box-shadow: inset 0px 12px 25px 5px rgba(0, 0, 0, 0.4);
+}
+
+.searchIcon{
+    height: 48px;
+    background-color: #F7C505;
+    padding: 8px;
+    margin-inline: 8px;
+    border: 0;
+    border-radius: 30px;
+    box-shadow: 7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066), 12.4px 19.6px 10px rgba(0, 0, 0, 0.095), 18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124), 40px 63px 80px rgba(0, 0, 0, 0.19);
+}
+
+::placeholder{
+    color: #F7C505;
 }
 
 h1{
