@@ -41,7 +41,7 @@ async function loadMorePokemon() {
 
 // get and interpret data
 
-//Einholen der pokemon für die erste Seite
+//Get Pokemon for first Page
 async function fetchFirstFew() {
     for (let i = 1; i <= 40; i++) { 
         let response = await fetch(DETAIL_URL_BASE + i + "/");
@@ -56,7 +56,7 @@ async function fetchFirstFew() {
 }
 
 
-//Einholen der Pokemon für die Folgenden Seiten und die Suchfunktion
+//Get all leaft Pokemon for following pages and search function
 async function fetchThemAll() {
     let fetchPromises = [];
     for (let i = 41; i < 1025; i++) { 
@@ -71,7 +71,7 @@ async function fetchThemAll() {
     }
 }
 
-//Renderfunktion für 40 Pokekarten
+//Renderfunction for 40 cards
 async function renderMonEntrys() {
     if (allPokemon.length < 40) return; 
     let contentRef = document.getElementById('content');
@@ -85,7 +85,7 @@ async function renderMonEntrys() {
 }
 
 
-//Renderfunktion der Suchergebnisse
+//Renderfunction for searchresults
 function renderFilteredMon(filteredPokemon) {
     let contentRef = document.getElementById('content');
     
@@ -97,7 +97,7 @@ function renderFilteredMon(filteredPokemon) {
     animatedArea.style.display = 'none'; 
 }
 
-//Weitergabe von 'renderMonEntrys' und 'renderMon' an Template
+//Send 'renderMonEntrys' to template
 function addPokemonToContent(contentRef, pokemon, id) {
     contentRef.innerHTML += getPokeTemplate(
         pokemon.name,
@@ -110,20 +110,20 @@ function addPokemonToContent(contentRef, pokemon, id) {
     );
 }
 
-//Interaktion mit der Seite
+//Interactions with program
 
 
-//Rendern von 40 weiteren Pokekarten
+//Rendering of the 40 next cards
 function loadMore() {
     animatedArea.style.display = 'block'; 
     setTimeout(() => {
         renderMonEntrys(); 
-        //animatedArea.style.display = 'none'; 
+        animatedArea.style.display = 'none'; 
     }, 1000); 
 }
 
 
-//Suchen ab 3 Buchstaben und aufrufen der Renderfunktion
+//Searchfunktion, start at 3 letters or more
 function filterPokemon() {
     let searchTerm = document.getElementById('search').value.toLowerCase();
     if (searchTerm.length < 3) {
@@ -136,7 +136,7 @@ function filterPokemon() {
     renderFilteredMon(filteredPokemon); 
 }
 
-//Wenden der gewählten Pokekarte
+//Flip selected card
 function toggleFlip(card) {
     card.classList.toggle('flipped');
     let blurEffect = document.querySelector('.blur-effect');
@@ -151,7 +151,7 @@ function toggleFlip(card) {
     
 }
 
-//Scroll zur vorangegangenen Pokekarte
+//Flip to lower card
 function backFlip(card, id) {
     toggleFlip(card);
 
@@ -166,7 +166,7 @@ function backFlip(card, id) {
 }
 
 
-//Scroll zu darauffolgenden Pokekarte
+//flip to higher card
 function frontFlip(card, id) {
     toggleFlip(card);
 
