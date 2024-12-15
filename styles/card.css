@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     width: 200px;
-    height: 324px;
+    height: 372px;
     margin: 24px;
     padding: 12px;
     transition: transform 0.5s ease;
@@ -58,7 +58,6 @@
 }
 
 .pokeCard:hover {
-    cursor: pointer;
     transform: scale(1.2); 
 }
 
@@ -73,7 +72,7 @@
 .pokeCard.flipped .cardInner {
     transform: rotateY(180deg) scale(1.2);
     width: 312px;
-    height: 424px;
+    height: 440px;
 }
 
 .blur-effect {
@@ -265,6 +264,12 @@ p{
     margin-top: 12px;
 }
 
+.cardFrontFooter{
+    display: flex;
+    justify-content: end;
+    margin-top: 12px;
+}
+
 button{
     font-family: titan one;
     font-weight: 100;
@@ -284,4 +289,59 @@ button:hover{
     transform: translate3d(0, 5px, 0);
 }
 
+.xIcon{
+    width: 32px;
+    margin: 0px 0px 12px 235px;
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    color: #FFE361;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    padding: 8px;
+    box-shadow: 7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066), 12.4px 19.6px 10px rgba(0, 0, 0, 0.095), 18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124), 40px 63px 80px rgba(0, 0, 0, 0.19);
+}
+
+.xIcon:hover{
+    cursor: pointer;
+    transform: translate3d(0, 5px, 0);
+}
+
+.arrowRight {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid #FFE361; 
+    transform: rotate(90deg);
+}
+
+.arrowLeft {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid #FFE361; 
+    transform: rotate(90deg); 
+}
+
+.arrowBox{
+    background-color: rgb(94, 154, 213);
+    border: solid #FFE361 5px;
+    color: #FFE361;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    padding: 8px;
+    box-shadow: 7.1px 11.2px 3.6px rgba(0, 0, 0, 0.066), 12.4px 19.6px 10px rgba(0, 0, 0, 0.095), 18.9px 29.8px 24.1px rgba(0, 0, 0, 0.124), 40px 63px 80px rgba(0, 0, 0, 0.19);
+}
+
+.arrowBox:hover{
+    cursor: pointer;
+    transform: translate3d(0, 5px, 0);
+}
 

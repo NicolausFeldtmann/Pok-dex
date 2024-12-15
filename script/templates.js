@@ -1,9 +1,10 @@
 function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stats) {
-    let moveLines = moves.split(', ').map(move => `<p>${move}</p>`).join('');//
-    let statsLines = stats.split(', ').map(stat => `<p>${stat}</p>`).join('');// Infotexte auf den Karten korreckt darstellen
-    let abiLines = abilities.split(', ').map(ability => `<p>${ability}</p>`).join('');//
+    let moveLines = moves.split(', ').map(move => `<p>${move}</p>`).join('');
+    let statsLines = stats.split(', ').map(stat => `<p>${stat}</p>`).join('');
+    let abiLines = abilities.split(', ').map(ability => `<p>${ability}</p>`).join('');
+    
     return `
-        <div class="pokeCard" data-id="${id}" onclick="toggleFlip(this, ${id})">
+        <div class="pokeCard" data-id="${id}">
             <div class="cardInner" style="background-color: ${backgroundColor};">
                 <div class="cardFront" style="background-color: ${backgroundColor};">
                     <div class="card-nav">
@@ -20,8 +21,14 @@ function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stat
                         <h6>ABILITIES:</h6>
                         <div>${abiLines}</div>
                     </div>
+                    <div class="cardFrontFooter">
+                        <button onclick="toggleFlip(this.closest('.pokeCard'))">INFO</button>
+                    </div>
                 </div>
                 <div class="cardBack">
+                    <div class="cardBackNav">
+                        <img class="xIcon" src="./assets/img/x.png" onclick="toggleFlip(this.closest('.pokeCard'))">
+                    </div>
                     <div class="backHead">
                         <h4>#${id}</h4>
                         <div class="cardHeader">
@@ -38,12 +45,15 @@ function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stat
                         <div>${statsLines}</div>
                     </div>
                     <div class="cardFooter">
-                        <button onclick="backFlip(this, ${id})">Back</button>
-                        <button onclick="frontFlip(this, ${id})">FORWARD</button>
+                        <div class="arrowBox">
+                            <div class="arrowLeft" onclick="backFlip(this.closest('.pokeCard'), ${id})"></div>
+                        </div>
+                        <div class="arrowBox">
+                            <div class="arrowRight" onclick="frontFlip(this.closest('.pokeCard'), ${id})"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     `;
 }
-

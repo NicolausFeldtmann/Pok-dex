@@ -71,8 +71,8 @@
     }
 
     .cardInner{
-        height: 312px;
-        width: 148px;
+        height: 360px;
+        width: 180px;
     }
 
     .cardFront{
@@ -88,12 +88,13 @@
 
     .pokeCard.flipped .cardInner{
         width: 236px;
-        height: 344px;
+        height: 376px;
         z-index: 9;
     }
 
     .pokeDisplay{
         width: 85%;
+        padding: 12px;
     }
 
     .bottomBox{
@@ -126,8 +127,8 @@
     }
 
     .cardInner{
-        height: 240px;
-        width: 100px;
+        height: 328px;
+        width: 164px;
         margin: 8px;
         border: solid #FFE361 6px;
     }
@@ -137,7 +138,7 @@
     }
 
     .pokeImg{
-        max-width: 72px;
+        max-width: 132px;
     }
 
     .spinnObject{
@@ -160,6 +161,11 @@
         margin-top: 4px;
     }
 
+    .xIcon{
+        width: 16px;
+        margin: 0px 0px 12px 172px;
+    }
+
     @keyframes wobble {
         0% { transform: translateX(0%); }
         15% { transform: translateX(-10%) rotate(-5deg); }
@@ -171,10 +177,15 @@
  }
 }
 
- @media (max-width: 400px) {
+ @media (max-width: 475px) {
 
     .pokeDisplay{
-        padding: 16px;
+        padding: 6px;
+    }
+
+    .content{
+        align-items: center;
+        flex-direction: column;
     }
 
     h1{
@@ -196,13 +207,14 @@
     }
 
     h6{
-        font-size: 8px;
+        font-size: 12px;
         border: solid #FFE361 4px;
+        padding-inline: 6px;
     }
 
     .cardInner{
-        height: 232px;
-        width: 100px;
+        height: 248px;
+        width: 156px;
         margin: 4px;
     }
 
@@ -252,6 +264,18 @@
         align-items: baseline;
     }
 
+    .searchField{
+        width: 180px;
+    }
+
+    .searchIcon{
+        height: 32px;
+    }
+
+    .cardFrontFooter{
+        margin-top: 6px;
+    }
+
     @keyframes wobble {
         0% { transform: translateX(0%); }
         15% { transform: translateX(-2%) rotate(-5deg); }
@@ -262,3 +286,45 @@
         100% { transform: translateX(0%); }
  }
  }
+
+ @media(max-width: 375px) {
+    .searchField{
+        width: 138px;
+    }
+
+    .pokeCard.flipped .cardInner{
+        width: 200px;
+    }
+ }
+
+@media(max-width: 315px) {
+
+    .cardInner{
+        width: 100px;
+    }
+
+    .pokeCard.flipped .cardInner{
+        width: 150px;
+    }
+
+    .searchIcon{
+        display: none;
+    }
+
+    h1{
+        font-size: 28px;
+    }
+
+    .searchField{
+        width: 48px;
+        font-size: 12px;
+    }
+
+    .xIcon{
+        margin: 0px 0px 0px 100px;
+    }
+
+    .cardHeader{
+        margin-top: 6px;
+    }
+}

@@ -1,29 +1,7 @@
-let colorPoke = {
-    normal: "rgb(206, 206, 206)",
-    fire: "rgb(255, 107, 107)",
-    fighting: "rgb(255, 128, 0)",
-    water: "rgb(41, 128, 239)",
-    flying: "rgb(129, 185, 239)",
-    grass: "rgb(124, 198, 107)",
-    poison: "rgb(150, 76, 206)",
-    electric: "rgb(250, 192, 0)",
-    ground: "rgb(150, 108, 78)",
-    psychic: "rgb(255, 79, 134)",
-    rock: "rgb(150, 148, 132)",
-    ice: "rgb(185, 234, 247)",
-    bug: "rgb(177, 188, 90)",
-    dragon: "rgb(0, 22, 196)",
-    ghost: "rgb(168, 26, 168)",
-    dark: "rgb(71, 54, 54)",
-    steel: "rgb(132, 166, 178)",
-    fairy: "rgb(252, 169, 220)",
-    stellar: "rgb(64, 181, 165)",
-};
 
 let offset = 0; 
 let LIMIT = 40; 
 let loadingComplete = false;
-
 
 async function init() {
     await getData();
@@ -39,9 +17,6 @@ async function loadMorePokemon() {
     loadMore();
 }
 
-// get and interpret data
-
-//Get Pokemon for first Page
 async function fetchFirstFew() {
     for (let i = 1; i <= 40; i++) { 
         let response = await fetch(DETAIL_URL_BASE + i + "/");
@@ -55,8 +30,6 @@ async function fetchFirstFew() {
     document.getElementById('search').addEventListener('input', filterPokemon); 
 }
 
-
-//Get all leaft Pokemon for following pages and search function
 async function fetchThemAll() {
     let fetchPromises = [];
     for (let i = 41; i < 1025; i++) { 
@@ -71,7 +44,6 @@ async function fetchThemAll() {
     }
 }
 
-//Renderfunction for 40 cards
 async function renderMonEntrys() {
     if (allPokemon.length < 40) return; 
     let contentRef = document.getElementById('content');
@@ -84,8 +56,6 @@ async function renderMonEntrys() {
     animatedArea.style.display = 'none';
 }
 
-
-//Renderfunction for searchresults
 function renderFilteredMon(filteredPokemon) {
     let contentRef = document.getElementById('content');
     
@@ -97,7 +67,6 @@ function renderFilteredMon(filteredPokemon) {
     animatedArea.style.display = 'none'; 
 }
 
-//Send 'renderMonEntrys' to template
 function addPokemonToContent(contentRef, pokemon, id) {
     contentRef.innerHTML += getPokeTemplate(
         pokemon.name,
@@ -110,10 +79,6 @@ function addPokemonToContent(contentRef, pokemon, id) {
     );
 }
 
-//Interactions with program
-
-
-//Rendering of the 40 next cards
 function loadMore() {
     animatedArea.style.display = 'block'; 
     setTimeout(() => {
@@ -122,13 +87,13 @@ function loadMore() {
     }, 1000); 
 }
 
-
-//Searchfunktion, start at 3 letters or more
 function filterPokemon() {
     let searchTerm = document.getElementById('search').value.toLowerCase();
     if (searchTerm.length < 3) {
         document.getElementById('content').innerHTML = ''; 
         return;
+    } if (searchTerm.length < 1) {
+        init();
     }
     let filteredPokemon = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
     offset = 0; 
@@ -136,7 +101,6 @@ function filterPokemon() {
     renderFilteredMon(filteredPokemon); 
 }
 
-//Flip selected card
 function toggleFlip(card) {
     card.classList.toggle('flipped');
     let blurEffect = document.querySelector('.blur-effect');
@@ -147,11 +111,8 @@ function toggleFlip(card) {
         blurEffect.style.display = 'none';
         document.body.style.overflow = 'auto'; 
     }
-    console.log('toggel');
-    
 }
 
-//Flip to lower card
 function backFlip(card, id) {
     toggleFlip(card);
 
@@ -165,8 +126,6 @@ function backFlip(card, id) {
     }, 700);
 }
 
-
-//flip to higher card
 function frontFlip(card, id) {
     toggleFlip(card);
 
