@@ -89,21 +89,16 @@ function loadMore() {
 
 function filterPokemon() {
     let searchTerm = document.getElementById('search').value.toLowerCase();
+    offset = 0; 
+    document.getElementById('content').innerHTML = '';
     if (searchTerm.length < 3) {
-        if (searchTerm.length === 0) {
-            offset = 0; 
-            document.getElementById('content').innerHTML = ''; 
-            renderMonEntrys(); 
-        } else {
-            document.getElementById('content').innerHTML = ''; 
-        }
+        searchTerm.length === 0 ? renderMonEntrys() : null;
         return;
     }
-
     let filteredPokemon = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
-    offset = 0; 
-    document.getElementById('content').innerHTML = ''; 
-    renderFilteredMon(filteredPokemon); 
+    filteredPokemon.length === 0 
+        ? document.getElementById('content').innerHTML = '<h3>LEIDER, LEIDER NICHTS GEFUNDEN =(</h3>' 
+        : renderFilteredMon(filteredPokemon);
 }
 
 function toggleFlip(card) {
