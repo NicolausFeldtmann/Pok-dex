@@ -32,14 +32,14 @@ async function fetchFirstFew() {
 
 async function fetchThemAll() {
     let fetchPromises = [];
-    for (let i = 41; i < 1025; i++) { 
+    for (let i = 1; i < 1025; i++) { 
         fetchPromises.push(fetch(DETAIL_URL_BASE + i + "/").then(response => response.json()));
     }
     let results = await Promise.all(fetchPromises);
     allPokemon.push(...results);
 
     loadingComplete = true; 
-    if (allPokemon.length > 39) {
+    if (allPokemon.length > 0) {
         renderMonEntrys(); 
     }
 }
@@ -90,11 +90,16 @@ function loadMore() {
 function filterPokemon() {
     let searchTerm = document.getElementById('search').value.toLowerCase();
     if (searchTerm.length < 3) {
-        document.getElementById('content').innerHTML = ''; 
+        if (searchTerm.length === 0) {
+            offset = 0; 
+            document.getElementById('content').innerHTML = ''; 
+            renderMonEntrys(); 
+        } else {
+            document.getElementById('content').innerHTML = ''; 
+        }
         return;
-    } if (searchTerm.length < 1) {
-        init();
     }
+
     let filteredPokemon = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
     offset = 0; 
     document.getElementById('content').innerHTML = ''; 
