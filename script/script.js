@@ -14,7 +14,7 @@ async function getData() {
 }
 
 async function loadMorePokemon() {
-    loadMore();
+    loadMore()
 }
 
 async function fetchFirstFew() {
@@ -32,7 +32,7 @@ async function fetchFirstFew() {
 
 async function fetchThemAll() {
     let fetchPromises = [];
-    for (let i = 1; i < 1025; i++) { 
+    for (let i = 1; i < 1026; i++) { 
         fetchPromises.push(fetch(DETAIL_URL_BASE + i + "/").then(response => response.json()));
     }
     let results = await Promise.all(fetchPromises);
@@ -45,6 +45,7 @@ async function fetchThemAll() {
 }
 
 async function renderMonEntrys() {
+    animatedArea.style.display = 'block';
     if (allPokemon.length < 40) return; 
     let contentRef = document.getElementById('content');
     
@@ -68,14 +69,20 @@ function renderFilteredMon(filteredPokemon) {
 }
 
 function addPokemonToContent(contentRef, pokemon, id) {
+    const moves = pokemon.moves.slice(0, 3).map(m => m.move.name).join(", ");
+    const stats = pokemon.stats.map(s => `${s.stat.name}: ${s.base_stat}`).join(", ");
+    const abilities = pokemon.abilities.map(a => a.ability.name).join(", ");
+    const moveLines = moves.split(', ').map(move => `<p>${move}</p>`).join('');
+    const statsLines = stats.split(', ').map(stat => `<p>${stat}</p>`).join('');
+    const abiLines = abilities.split(', ').map(ability => `<p>${ability}</p>`).join('');
     contentRef.innerHTML += getPokeTemplate(
         pokemon.name,
-        pokemon.abilities.map(a => a.ability.name).join(", "),
+        abiLines,
         id,
         pokemon.types[0].type.name,
         colorPoke[pokemon.types[0].type.name],
-        pokemon.moves.slice(0, 3).map(m => m.move.name).join(", "),
-        pokemon.stats.map(s => `${s.stat.name}: ${s.base_stat}`).join(", ")
+        moveLines,
+        statsLines
     );
 }
 
@@ -84,7 +91,7 @@ function loadMore() {
     setTimeout(() => {
         renderMonEntrys(); 
         animatedArea.style.display = 'none'; 
-    }, 1000); 
+    },); 
 }
 
 function filterPokemon() {
@@ -114,6 +121,11 @@ function toggleFlip(card) {
 }
 
 function backFlip(card, id) {
+    if (id === 1) {
+        alert("Es gibt keine vorherige Karte."); 
+        return; 
+    }
+
     toggleFlip(card);
 
     setTimeout(() => {
@@ -126,15 +138,18 @@ function backFlip(card, id) {
     }, 700);
 }
 
-function frontFlip(card, id) {
+async function frontFlip(card, id) {
     toggleFlip(card);
-
-    setTimeout(() => {
-        if (id < 1025) {
-            let nextCard = document.querySelector(`.pokeCard[data-id="${id + 1}"]`);
-            if (nextCard) {
-                toggleFlip(nextCard);
-            }
+    setTimeout(async () => {
+        let nextCard = document.querySelector(`.pokeCard[data-id="${id + 1}"]`);
+        if (!nextCard && id < 1025) { await loadMorePokemon();
+            setTimeout(() => { nextCard = document.querySelector(`.pokeCard[data-id="${id + 1}"]`);
+                if (nextCard) {
+                    toggleFlip(nextCard);
+                }
+            }, 500);
+        } else if (nextCard) {
+            toggleFlip(nextCard);
         }
     }, 700);
 }
