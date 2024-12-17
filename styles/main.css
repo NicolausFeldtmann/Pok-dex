@@ -77,6 +77,7 @@ h1{
 }
 
 .pokeDisplay{
+    max-width: 1920px;
     border-radius: 35px;
     background-color: rgb(179, 7, 7);
     width: 75%;

@@ -18,29 +18,43 @@ async function loadMorePokemon() {
 }
 
 async function fetchFirstFew() {
-    for (let i = 1; i <= 40; i++) { 
-        let response = await fetch(DETAIL_URL_BASE + i + "/");
-        let responseMon = await response.json();
-        allPokemon.push(responseMon);
-    }
-    loadingComplete = true; 
-    if (allPokemon.length > 39) {
-        renderMonEntrys(); 
-    }
-    document.getElementById('search').addEventListener('input', filterPokemon); 
+    try { for (let i = 1; i <= 40; i++) { 
+            let response = await fetch(DETAIL_URL_BASE + i + "/");
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            let responseMon = await response.json();
+            allPokemon.push(responseMon);
+        }
+        loadingComplete = true; 
+        if (allPokemon.length > 39) {
+            renderMonEntrys(); 
+        }
+        document.getElementById('search').addEventListener('input', filterPokemon); 
+    } catch (error) { console.error("Fehler beim Abrufen der Pokémon-Daten:", error); }
 }
 
 async function fetchThemAll() {
     let fetchPromises = [];
-    for (let i = 1; i < 1026; i++) { 
-        fetchPromises.push(fetch(DETAIL_URL_BASE + i + "/").then(response => response.json()));
-    }
-    let results = await Promise.all(fetchPromises);
-    allPokemon.push(...results);
-
-    loadingComplete = true; 
-    if (allPokemon.length > 0) {
-        renderMonEntrys(); 
+    try {
+        for (let i = 1; i < 1026; i++) { 
+            fetchPromises.push(
+                fetch(DETAIL_URL_BASE + i + "/").then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+            );
+        }
+        let results = await Promise.all(fetchPromises);
+        allPokemon.push(...results);
+        loadingComplete = true; 
+        if (allPokemon.length > 0) {
+            renderMonEntrys(); 
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Pokémon-Daten:", error);
     }
 }
 

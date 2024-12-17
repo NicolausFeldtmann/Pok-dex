@@ -1,4 +1,4 @@
-const DETAIL_URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
+const DETAIL_URL_BASE = "https://pokeapi.co/api/v2/pokemon/1/";
 const IMG_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png";
 
 let pokeImg = [];
