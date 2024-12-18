@@ -18,7 +18,7 @@ function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stat
                         <div>${abilities}</div>
                     </div>
                     <div class="cardFrontFooter">
-                        <button onclick="toggleFlip(this.closest('.pokeCard'))">INFO</button>
+                        <button onclick="toggleFlip(this.closest('.pokeCard'), ${id})">INFO</button>
                     </div>
                 </div>
                 <div class="cardBack">
@@ -41,10 +41,10 @@ function getPokeTemplate(name, abilities, id, type, backgroundColor, moves, stat
                         <div>${stats}</div>
                     </div>
                     <div class="cardFooter">
-                        <div class="arrowBox">
-                            <div class="arrowLeft" onclick="backFlip(this.closest('.pokeCard'), ${id})"></div>
+                        <div class="arrowBox" id="boxLeft">
+                            <div class="arrowLeft" id="arrowLeft" onclick="backFlip(this.closest('.pokeCard'), ${id})"></div>
                         </div>
-                        <div class="arrowBox">
+                        <div class="arrowBox" id="boxRigth">
                             <div class="arrowRight" onclick="frontFlip(this.closest('.pokeCard'), ${id})"></div>
                         </div>
                     </div>

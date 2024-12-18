@@ -122,9 +122,14 @@ function filterPokemon() {
         : renderFilteredMon(filteredPokemon);
 }
 
-function toggleFlip(card) {
+function toggleFlip(card, id) {
     card.classList.toggle('flipped');
     let blurEffect = document.querySelector('.blur-effect');
+    
+    if (id === 1) {
+        dieGrey();
+    }
+    
     if (card.classList.contains('flipped')) {
         blurEffect.style.display = 'block';
         document.body.style.overflow = 'hidden'; 
@@ -136,12 +141,10 @@ function toggleFlip(card) {
 
 function backFlip(card, id) {
     if (id === 1) {
-        alert("Es gibt keine vorherige Karte."); 
+        alert("Es gibt keine vorherige Karte.");
         return; 
     }
-
     toggleFlip(card);
-
     setTimeout(() => {
         if (id > 1) { 
             let previousCard = document.querySelector(`.pokeCard[data-id="${id - 1}"]`);
@@ -168,6 +171,20 @@ async function frontFlip(card, id) {
     }, 700);
 }
 
-
-
-
+function dieGrey() {
+    let arrowLeft = document.getElementById('arrowLeft');
+    let boxLeft = document.getElementById('boxLeft');
+    if (arrowLeft) {
+        arrowLeft.style.borderTopColor = 'grey'; 
+        arrowLeft.classList.add('arrowLeftGrey');
+        console.log('Arrow left styled grey');
+    } else {
+        console.warn('ArrowLeft element not found!');
+    }
+    if (boxLeft) {
+        boxLeft.style.backgroundColor = '#c9c9c9'; 
+        console.log('Box left styled grey');
+    } else {
+        console.warn('BoxLeft element not found!');
+    }
+}

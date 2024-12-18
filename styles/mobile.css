@@ -111,7 +111,7 @@
     }
 
     h3{
-        font-size: 12px;
+        font-size: 16px;
     }
 
     h4{
@@ -123,7 +123,7 @@
     }
 
     p{
-        font-size: 8px;
+        font-size: 12px;
     }
 
     .cardInner{
@@ -131,6 +131,7 @@
         width: 164px;
         margin: 8px;
         border: solid #FFE361 6px;
+        padding: 24px 24px 32px 24px;
     }
 
     .card-back{
@@ -192,12 +193,16 @@
         font-size: 48px;
     }
 
+    h2{
+        font-size: 16px;
+    }
+
     h3{
-        font-size: 12px;
+        font-size: 16px;
     }
 
     h4{
-        font-size: 12px;
+        font-size: 16px;
         margin: 0px;
         border: solid #FFE361 4px;
     }
@@ -216,18 +221,25 @@
         height: 248px;
         width: 156px;
         margin: 4px;
+        padding: 12px 12px 32px 12px;
+    }
+
+    .cardHeader{
+        width: 108px;
     }
 
     .cardFront{
         max-width: 96px;
+        align-items: center;
     }
 
-    .cardHeader{
-        margin-top: 16px;
+    .backHead{
+        justify-content: center;
     }
 
     .card-nav{
-        height: 12px;
+     
+        margin-top: 0px;
     }
 
     .pokeImgArea{
@@ -240,10 +252,6 @@
 
     .spinnObject{
         height: 148px;
-    }
-
-    h2{
-        font-size: 16px;
     }
 
     .boardRim{
@@ -301,6 +309,12 @@
 
     .cardInner{
         width: 100px;
+        padding: 8px 12px 32px 12px;
+    }
+
+    .cardHeader{
+        margin-inline: 0px;
+        margin-top: 6px;
     }
 
     .pokeCard.flipped .cardInner{
@@ -321,10 +335,14 @@
     }
 
     .xIcon{
-        margin: 0px 0px 0px 100px;
+        margin: 0px 0px 0px 132px;
     }
 
-    .cardHeader{
-        margin-top: 6px;
+    .attacks{
+        margin-inline: 8px;
+    }
+
+    .stats{
+        margin-inline: 8px;
     }
 }
